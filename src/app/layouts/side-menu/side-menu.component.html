@@ -1,0 +1,17 @@
+<div class="side-menu-container">
+  <nav>
+    <ul>
+      <li fxLayout="column" *ngFor="let item of menu">
+        <a routerLink="{{ item.path }}" routerLinkActive="active" fxLayout="row"
+        fxLayoutGap="15px">
+          <div class="item-icon">
+            <mat-icon aria-hidden="false">{{ item.icon }}</mat-icon>
+          </div>
+          <div class="item-label">
+            <span>{{ item.label }}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,15 @@
+<ng-container>
+	<app-toolbar>
+		<button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+	</app-toolbar>
+	<mat-sidenav-container>
+		<mat-sidenav #snav [mode]="'side'" [fixedInViewport]="true" [fixedTopGap]="104">
+			<app-side-menu></app-side-menu>
+		</mat-sidenav>
+		<mat-sidenav-content>
+			<div class="content">
+				<router-outlet></router-outlet>
+			</div>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
+</ng-container>

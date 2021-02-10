@@ -1,0 +1,42 @@
+@import '../../../sass/variables.scss';
+
+.side-menu-container {
+  margin-top: 35px;
+  nav > ul {
+    list-style: none;
+    padding: 0;
+    > li {
+      padding: 0;
+      max-width: 300px;
+      margin: 20px 0;
+      cursor: pointer;
+       > a {
+        text-decoration: none;
+        outline: none;
+        padding: 15px;
+        .item-icon {
+          font-size: 25px;
+          color: $black-0;
+        }
+        .item-label {
+          font-weight: 300;
+          font-size: 25px;
+          color: $black-0;
+        }
+      }
+      > a.active {
+        background-color: $gray-2;
+        padding: 15px;
+        border-radius: 0 100px 100px 0;
+        text-decoration: none;
+        .item-icon {
+          color: $primary-0;
+        }
+        .item-label {
+          color: $primary-0;
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}
