@@ -14,12 +14,19 @@ export class PokemonService {
 
   public getPokemons(filters?: PokemonFilter): Observable<PokemonResponse> {
     const url = `${ ApiGateway.POKEMONS }`;
-    const { page, itemPerPage, search } = filters;
-    const params = new HttpParams()
+    const { page, itemPerPage, search, sort } = filters;
+    let params = new HttpParams()
       .set('page', `${page}`)
       .set('itemPerPage', `${itemPerPage}`)
       .set('search', `${search}`)
-      .set('sort', `{name: 1}`)
+
+    if (filters.sort) {
+      const sortType = `{${sort.columnName}:${sort.sortType}}`;
+      params = params.set('sort', sortType);
+    } else {
+      const sortType = `{createdAt:1}`;
+      params = params.set('sort', sortType);
+    }
     return this.http.get<PokemonResponse>(url, { params });
   }
 }

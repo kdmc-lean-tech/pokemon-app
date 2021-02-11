@@ -3,7 +3,7 @@ import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { PokemonService } from '../../services/pokemon.service';
 import { AppState } from '../models/app.model';
-import { loadPokemons, setPaginatorFilter, setSearchFilter, setPokemons } from '../actions/pokemons.actions';
+import { loadPokemons, setPaginatorFilter, setSearchFilter, setPokemons, toggleSortFilter } from '../actions/pokemons.actions';
 import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class PokemonEffects {
   ) {}
 
   loadPokemons$ = createEffect(() => this.actions$.pipe(
-    ofType(loadPokemons, setPaginatorFilter, setSearchFilter),
+    ofType(loadPokemons, setPaginatorFilter, setSearchFilter, toggleSortFilter),
     withLatestFrom(this.store.select('pokemons')),
     mergeMap(([, { filters }]) => {
       return this.pokemonService.getPokemons(filters)

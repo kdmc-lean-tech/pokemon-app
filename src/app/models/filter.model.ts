@@ -3,4 +3,4 @@ export enum SortType {
   Ascending = -1,
 }
 
-export type SortPokemonColumn = 'createdAt' | 'name' | 'generation' | 'createdBy';
+export type SortPokemonColumn = 'createdAt' | 'name' | 'generation' | 'createdBy.name' | 'pokedexNumber';

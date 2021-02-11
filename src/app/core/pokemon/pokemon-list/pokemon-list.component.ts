@@ -3,8 +3,10 @@ import { Pokemon } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription } from 'rxjs';
-import { loadPokemons, setPaginatorFilter } from '../../../store/actions/pokemons.actions';
+import { loadPokemons, setPaginatorFilter, toggleSortFilter } from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
+import { PokemonFilter } from '../../../store/models/pokemons.model';
+import { SortPokemonColumn } from '../../../models/filter.model';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -19,6 +21,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   public page: number;
   public itemPerPage: number;
   public len: number;
+  public filters: PokemonFilter;
 
   constructor(private store: Store<AppState>) { }
 
@@ -35,6 +38,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
         this.page = pokemons.filters.page;
         this.itemPerPage = pokemons.filters.itemPerPage;
         this.len = pokemons.len;
+        this.filters = pokemons.filters;
       }),
     );
     this.store.dispatch(loadPokemons());
@@ -45,6 +49,10 @@ export class PokemonListComponent implements OnInit, OnDestroy {
     this.page = $event.page;
     this.itemPerPage = $event.pageSize;
     this.store.dispatch(setPaginatorFilter({ page: this.page, itemPerPage: 10 }));
+  }
+
+  public toogleSortByColumn(columnName: SortPokemonColumn) {
+    this.store.dispatch(toggleSortFilter({ columnName }));
   }
 
   ngOnDestroy() {

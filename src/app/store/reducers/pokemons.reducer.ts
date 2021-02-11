@@ -1,10 +1,12 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { PokemonState, PokemonFilter } from '../models/pokemons.model';
+import { PokemonState, PokemonFilter, PokemonSort } from '../models/pokemons.model';
+import { SortType } from '../../models/filter.model';
 import {
   loadPokemons,
   setPokemons,
   setPaginatorFilter,
-  setSearchFilter
+  setSearchFilter,
+  toggleSortFilter
 } from '../actions/pokemons.actions';
 
 export const initialState: PokemonState = {
@@ -12,7 +14,8 @@ export const initialState: PokemonState = {
   filters: {
     page: 1,
     itemPerPage: 10,
-    search: ''
+    search: '',
+    sort: undefined
   },
   len: 0
 }
@@ -49,7 +52,28 @@ const _pokemonReducer = createReducer(
       ...state,
       filters
     }
-  })
+  }),
+  on(toggleSortFilter, (state, { columnName }) => {
+    const sortFilter = state.filters.sort;
+    let sort: PokemonSort;
+    if (sortFilter) {
+      if (sortFilter.columnName === columnName) {
+        if (sortFilter.sortType === SortType.Descending) {
+          sort = { columnName, sortType: SortType.Ascending };
+        } else {
+          sort = initialState.filters.sort;
+        }
+      } else {
+        sort = { columnName, sortType: SortType.Descending };
+      }
+    } else {
+      sort = { columnName, sortType: SortType.Descending };
+    }
+    const filters: PokemonFilter = {
+      ...state.filters, sort, page: initialState.filters.page
+    };
+    return { ...state, filters };
+  }),
 );
 
 export function pokemonReducer(state: PokemonState, action: Action) {
