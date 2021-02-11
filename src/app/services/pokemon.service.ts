@@ -23,9 +23,6 @@ export class PokemonService {
     if (filters.sort) {
       const sortType = `{${sort.columnName}:${sort.sortType}}`;
       params = params.set('sort', sortType);
-    } else {
-      const sortType = `{createdAt:1}`;
-      params = params.set('sort', sortType);
     }
     return this.http.get<PokemonResponse>(url, { params });
   }

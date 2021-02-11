@@ -15,7 +15,7 @@ export const initialState: PokemonState = {
     page: 1,
     itemPerPage: 10,
     search: '',
-    sort: undefined
+    sort: { columnName: 'createdAt', sortType: 1 }
   },
   len: 0
 }
