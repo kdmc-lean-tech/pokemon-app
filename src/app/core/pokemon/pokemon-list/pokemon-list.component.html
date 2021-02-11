@@ -1,68 +1,110 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="pokedex">
-    <th mat-header-cell *matHeaderCellDef>
-      <app-sort-indicator 
-        [label]="'No. Pokedex'"
-        [columnName]="'pokedexNumber'"
-        [sort]="filters.sort"
-        (click)="toogleSortByColumn('pokedexNumber')">
+
+<span [ngSwitch]="(size$ | async)">
+  <div *ngSwitchCase="'xs'">
+    <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
+  </div>
+  <div *ngSwitchDefault>
+    <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
+  </div>
+</span>
+
+<ng-template #tableBig>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="pokedex">
+      <th mat-header-cell *matHeaderCellDef>
+        <app-sort-indicator 
+          [label]="'No. Pokedex'"
+          [columnName]="'pokedexNumber'"
+          [sort]="filters.sort"
+          (click)="toogleSortByColumn('pokedexNumber')">
+        </app-sort-indicator>
+      </th>
+      <td mat-cell *matCellDef="let pokemon"> {{ pokemon.pokedexNumber }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>
+        <app-sort-indicator 
+          [label]="'Name'"
+          [columnName]="'name'"
+          [sort]="filters.sort"
+          (click)="toogleSortByColumn('name')">
       </app-sort-indicator>
-    </th>
-    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.pokedexNumber }} </td>
-  </ng-container>
+      </th>
+      <td mat-cell *matCellDef="let pokemon"> {{ pokemon.name | titlecase }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="generation">
+      <th mat-header-cell *matHeaderCellDef>
+        <app-sort-indicator 
+          [label]="'Generation'"
+          [columnName]="'generation'"
+          [sort]="filters.sort"
+          (click)="toogleSortByColumn('generation')">
+      </app-sort-indicator>
+      </th>
+      <td mat-cell *matCellDef="let pokemon"> {{ pokemon.generation }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef>
+        <app-sort-indicator 
+          [label]="'Created By'"
+          [columnName]="'createdBy'"
+          [sort]="filters.sort"
+          (click)="toogleSortByColumn('createdBy.name')"
+          >
+      </app-sort-indicator>
+      </th>
+      <td mat-cell *matCellDef="let pokemon"> {{ pokemon?.createdBy?.name | titlecase }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>
+        <app-sort-indicator 
+          [label]="'CreatedAt'"
+          [columnName]="'createdAt'"
+          [sort]="filters.sort"
+          (click)="toogleSortByColumn('createdAt')">
+      </app-sort-indicator>
+      </th>
+      <td mat-cell *matCellDef="let pokemon"> {{ pokemon.createdAt | date }} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+  <div fxLayout="row" fxLayoutAlign="end">
+    <app-paginator [page]="page" [pageSize]="itemPerPage" [len]="len" (pageEmitter)="filterByPage($event)"></app-paginator>
+  </div>  
+</ng-template>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>
-      <app-sort-indicator 
-        [label]="'Name'"
-        [columnName]="'name'"
-        [sort]="filters.sort"
-        (click)="toogleSortByColumn('name')">
-    </app-sort-indicator>
-    </th>
-    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.name | titlecase }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="generation">
-    <th mat-header-cell *matHeaderCellDef>
-      <app-sort-indicator 
-        [label]="'Generation'"
-        [columnName]="'generation'"
-        [sort]="filters.sort"
-        (click)="toogleSortByColumn('generation')">
-    </app-sort-indicator>
-    </th>
-    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.generation }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="created">
-    <th mat-header-cell *matHeaderCellDef>
-      <app-sort-indicator 
-        [label]="'Created By'"
-        [columnName]="'createdBy'"
-        [sort]="filters.sort"
-        (click)="toogleSortByColumn('createdBy.name')"
-        >
-    </app-sort-indicator>
-    </th>
-    <td mat-cell *matCellDef="let pokemon"> {{ pokemon?.createdBy?.name | titlecase }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef>
-      <app-sort-indicator 
-        [label]="'CreatedAt'"
-        [columnName]="'createdAt'"
-        [sort]="filters.sort"
-        (click)="toogleSortByColumn('createdAt')">
-    </app-sort-indicator>
-    </th>
-    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.createdAt | date }} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-</table>
-<div fxLayout="row" fxLayoutAlign="end">
-  <app-paginator [page]="page" [pageSize]="itemPerPage" [len]="len" (pageEmitter)="filterByPage($event)"></app-paginator>
-</div>
+<ng-template #tableSmall>
+  <div fxLayout="column" fxLayoutAlign="end">
+    <div *ngFor="let pokemon of pokemons">
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <h1>{{ pokemon.name | titlecase }}</h1>
+          <div class="pokedex" fxLayout="row">
+            <span>{{ pokemon.pokedexNumber }}</span>
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <strong>Created By </strong>
+            <span>{{ pokemon.createdBy.name }}</span>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <strong>Created At </strong>
+            <span>{{ pokemon.createdAt | date }}</span>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <strong>Generation </strong>
+            <span>{{ pokemon.generation }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+    <app-paginator [page]="page" [pageSize]="itemPerPage" [len]="len" (pageEmitter)="filterByPage($event)"></app-paginator>
+  </div>  
+</ng-template>

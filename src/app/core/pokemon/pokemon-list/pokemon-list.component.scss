@@ -12,4 +12,30 @@
       @include text(400, 15px, $black-0);
     }
   }
+  mat-card {
+    margin-bottom: 15px;
+    -webkit-box-shadow: 5px 5px 18px -9px #000000; 
+    box-shadow: 5px 5px 18px -9px #000000;
+    h1 {
+      @include text(700, 25px, $primary-0);
+    }
+    .pokedex {
+      background-color: $primary-0;
+      color: $white-0;
+      height: 30px;
+      width: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    mat-list {
+      mat-list-item {
+        strong {
+          color: $primary-0;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
 }

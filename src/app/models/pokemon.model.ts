@@ -7,9 +7,9 @@ import { Paginator } from '../shared/models/paginator.model';
 
 export interface Pokemon extends Base {
   name: string;
-  types: PokemonType[];
-  abilities: PokemonAbility[];
   pokedexNumber: number;
+  generation: number;
+  createdBy: CreatedBy;
 }
 
 export interface PokemonDetail extends Pokemon {

@@ -1,5 +1,11 @@
-<div class="paginator-container" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="10px">
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="paginator-label-records">
+<div 
+    class="paginator-container"
+    fxLayout.lg="row"
+    fxLayoutAlign.xl="none center"
+    fxLayoutGap="10px"
+    fxLayout.xs="column"
+  >
+  <div fxLayout="row" fxLayoutAlign.lg="space-between center" fxLayoutGap="10px" class="paginator-label-records">
     <span>Items per page:</span>
     <div fxFlex="100px" class="items-perpage">
       <mat-select [(ngModel)]="pageSize">

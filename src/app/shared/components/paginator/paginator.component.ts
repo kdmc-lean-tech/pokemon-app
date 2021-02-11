@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -16,8 +24,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   public numPages: number;
   public arrayPages: number[] = [];
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnChanges() {
     this.calcPagination();

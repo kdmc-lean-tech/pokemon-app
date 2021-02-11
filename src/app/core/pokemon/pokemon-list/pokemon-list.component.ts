@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Pokemon } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { loadPokemons, setPaginatorFilter, toggleSortFilter } from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonFilter } from '../../../store/models/pokemons.model';
 import { SortPokemonColumn } from '../../../models/filter.model';
+import { BreakpointObserverService } from '../../../services/breakpoint-observer.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -22,8 +23,14 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   public itemPerPage: number;
   public len: number;
   public filters: PokemonFilter;
+  public size$: Observable<string>;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(
+    private store: Store<AppState>,
+    private breakpointObserverService: BreakpointObserverService
+  ) {
+    this.size$ = this.breakpointObserverService.size$;
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource([]);
@@ -45,10 +52,11 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   }
 
   public filterByPage($event: { page: number, pageSize: number, len: number }) {
+    console.log($event);
     this.len = $event.len;
     this.page = $event.page;
     this.itemPerPage = $event.pageSize;
-    this.store.dispatch(setPaginatorFilter({ page: this.page, itemPerPage: 10 }));
+    this.store.dispatch(setPaginatorFilter({ page: this.page, itemPerPage: this.itemPerPage }));
   }
 
   public toogleSortByColumn(columnName: SortPokemonColumn) {

@@ -33,9 +33,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-  }
-  .items-perpage {
-    margin-right: 20px;
+    justify-content: start;
+    .items-perpage {
+      margin-right: 20px;
+    }
   }
 }

@@ -7,7 +7,10 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexModule, FlexLayoutModule } from '@angular/flex-layout';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortIndicatorComponent } from './components/sort-indicator/sort-indicator.component';
 
@@ -36,7 +39,10 @@ import { SortIndicatorComponent } from './components/sort-indicator/sort-indicat
     FlexLayoutModule,
     InputFieldComponent,
     PaginatorComponent,
-    SortIndicatorComponent
+    SortIndicatorComponent,
+    MatCardModule,
+    MatListModule,
+    MatChipsModule
   ]
 })
 export class SharedModule { }
