@@ -1,3 +1,14 @@
+@mixin selectStyle($backgroundColor, $colorText) {
+  mat-select {
+    background-color: $backgroundColor;
+    border-radius: 16px;
+    padding: 7px;
+  }
+  ::ng-deep .mat-select-value {
+    color: $colorText;
+  }
+}
+
 @mixin text($fontWeight, $fontSize, $color) {
   font-weight: $fontWeight;
   font-size: $fontSize;

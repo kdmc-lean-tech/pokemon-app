@@ -1,0 +1,10 @@
+div {
+  cursor: pointer;
+  .mat-icon {
+    position: relative;
+    top: 14px;
+    &.active {
+      top: 8px;
+    }
+  }
+}

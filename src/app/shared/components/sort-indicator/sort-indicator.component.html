@@ -1,0 +1,10 @@
+<div>
+  {{ label }}
+  <mat-icon *ngIf="sort?.columnName === columnName; else noActiveSort" class="active">
+    {{ sort.sortType === sortType.Descending ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+  </mat-icon>
+</div>
+
+<ng-template #noActiveSort>
+  <mat-icon>maximize</mat-icon>
+</ng-template>

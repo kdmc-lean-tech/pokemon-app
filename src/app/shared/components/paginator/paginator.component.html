@@ -1,0 +1,39 @@
+<div class="paginator-container" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="paginator-label-records">
+    <span>Items per page:</span>
+    <div fxFlex="100px" class="items-perpage">
+      <mat-select [(ngModel)]="pageSize">
+        <mat-option *ngFor="let item of optionsPaginator" [value]=item (click)="calcNumPages(item); gotoInitialPage()">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+  <div class="pagination" fxLayout="row" fxLayoutGap="10px">
+    <a (click)="gotoInitialPage()" *ngIf="page !== 1">
+      <i class="material-icons">
+        first_page
+      </i>
+    </a>
+    <a (click)="prev()" *ngIf="page !== 1">
+      <i class="material-icons">
+        chevron_left
+      </i>
+    </a>
+    <a *ngFor="let p of arrayPages; let i = index;" (click)="goToPage(p)"
+    [class.active]="page === p">{{ p }}</a>
+    <a (click)="next()" *ngIf="arrayPages[arrayPages.length - 1] !== page">
+      <i class="material-icons">
+        chevron_right
+      </i>
+    </a>
+    <a (click)="gotoEndPage()" *ngIf="arrayPages[arrayPages.length - 1] !== page">
+      <i class="material-icons">
+        last_page
+      </i>
+    </a>
+  </div>
+  <div class="paginator-label-records">
+    <span>Total records: <strong>{{ len }}</strong></span>
+  </div>
+</div>
