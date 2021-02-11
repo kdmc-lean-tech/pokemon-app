@@ -30,3 +30,6 @@ $pokemon-app-theme: mat-light-theme($pokemon-app-primary, $pokemon-app-accent, $
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+table {
+  width: 100%;
+}

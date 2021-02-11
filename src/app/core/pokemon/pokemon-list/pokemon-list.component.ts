@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription } from 'rxjs';
 import { loadPokemons } from '../../../store/actions/pokemons.actions';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,9 +14,12 @@ import { loadPokemons } from '../../../store/actions/pokemons.actions';
 export class PokemonListComponent implements OnInit, OnDestroy {
   public pokemons: Pokemon[];
   private subscriptions = new Subscription();
+  public columns: string[] = ['pokedex', 'name', 'generation', 'created', 'date'];
+  public dataSource: MatTableDataSource<Pokemon>;
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource([]);
     this.getPokemons();
   }
 
@@ -23,6 +27,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.store.subscribe(({ pokemons }) => {
         this.pokemons = pokemons.pokemons;
+        this.dataSource.data = this.pokemons;
       }),
     );
     this.store.dispatch(loadPokemons());

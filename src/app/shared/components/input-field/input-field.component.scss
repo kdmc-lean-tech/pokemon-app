@@ -1,0 +1,19 @@
+@import '../../../../sass//variables.scss';
+@import '../../../../sass/mixins.scss';
+
+.input-container {
+  span {
+    @include text(700, 20px, $black-0);
+  }
+  input {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid $gray-4;
+    outline: 0;
+    font-size: 18px;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+}

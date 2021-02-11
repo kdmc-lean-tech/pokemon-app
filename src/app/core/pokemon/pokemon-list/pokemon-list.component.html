@@ -1,3 +1,30 @@
-<pre>
-  {{ pokemons | json }}
-</pre>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <ng-container matColumnDef="pokedex">
+    <th mat-header-cell *matHeaderCellDef> No. Pokedex </th>
+    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.pokedexNumber }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.name | titlecase }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="generation">
+    <th mat-header-cell *matHeaderCellDef> Generation </th>
+    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.generation }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="created">
+    <th mat-header-cell *matHeaderCellDef> Created By </th>
+    <td mat-cell *matCellDef="let pokemon"> {{ pokemon?.createdBy?.name | titlecase }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Created At </th>
+    <td mat-cell *matCellDef="let pokemon"> {{ pokemon.createdAt | date }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>

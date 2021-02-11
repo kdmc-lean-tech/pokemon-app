@@ -1,0 +1,12 @@
+<div class="input-container" fxLayout="row" fxLayoutGap="5px" fxFlex="100" fxLayoutAlign="center center">
+  <div fxFlex="35">
+    <span>{{ label }}</span>
+  </div>
+  <div fxFlex="65">
+    <input type="text"
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      (input)="setValue($event.target.value)">
+  </div>
+</div>

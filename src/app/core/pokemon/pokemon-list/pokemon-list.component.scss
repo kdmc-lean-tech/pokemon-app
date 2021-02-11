@@ -1,0 +1,15 @@
+@import '../../../../sass/mixins.scss';
+@import '../../../../sass/variables.scss';
+
+:host {
+  table {
+    @include white-box;
+    th.mat-header-cell {
+      @include text(400, 20px, $white-0);
+      background-color: $primary-0;
+    }
+    td.mat-cell {
+      @include text(400, 15px, $black-0);
+    }
+  }
+}
