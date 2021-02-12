@@ -3,11 +3,12 @@ import { Pokemon } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription, Observable } from 'rxjs';
-import { loadPokemons, setPaginatorFilter, toggleSortFilter } from '../../../store/actions/pokemons.actions';
+import { loadPokemons, setPaginatorFilter, toggleSortFilter, toogleSortFilterBySelects } from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonFilter } from '../../../store/models/pokemons.model';
 import { SortPokemonColumn } from '../../../models/filter.model';
 import { BreakpointObserverService } from '../../../services/breakpoint-observer.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -24,10 +25,20 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   public len: number;
   public filters: PokemonFilter;
   public size$: Observable<string>;
+  public sortByOptions: { label: string, value: string }[] = [
+    { label: 'Name', value: 'name' },
+    { label: 'Pokedex Number', value: 'pokedexNumber' },
+    { label: 'CreatedBy', value: 'createdBy.name' },
+    { label: 'Generation', value: 'generation' },
+    { label: 'Created At', value: 'createdAt' }
+  ];
+  public sortByType: string[] = ['Ascending', 'Descending'];
+  public sortForm: FormGroup;
 
   constructor(
     private store: Store<AppState>,
-    private breakpointObserverService: BreakpointObserverService
+    private breakpointObserverService: BreakpointObserverService,
+    private fb: FormBuilder
   ) {
     this.size$ = this.breakpointObserverService.size$;
   }
@@ -35,6 +46,15 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource([]);
     this.getPokemons();
+    this.createForm();
+  }
+
+  public createForm() {
+    this.sortForm = this.fb.group({
+      columnName: new FormControl('createdAt'),
+      sortType: new FormControl('Ascending')
+    });
+    this.listenSortControl();
   }
 
   public getPokemons() {
@@ -52,7 +72,6 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   }
 
   public filterByPage($event: { page: number, pageSize: number, len: number }) {
-    console.log($event);
     this.len = $event.len;
     this.page = $event.page;
     this.itemPerPage = $event.pageSize;
@@ -61,6 +80,16 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   public toogleSortByColumn(columnName: SortPokemonColumn) {
     this.store.dispatch(toggleSortFilter({ columnName }));
+  }
+
+  public listenSortControl() {
+    this.subscriptions.add(
+      this.sortForm.valueChanges.subscribe(value => {
+        const { columnName, sortType } = value;
+        const sortTypeFormat = sortType === 'Ascending' ? 1 : -1;
+        this.store.dispatch(toogleSortFilterBySelects({ columnName, sortType: sortTypeFormat }));
+      })
+    );
   }
 
   ngOnDestroy() {

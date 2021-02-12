@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { PokemonState, PokemonFilter, PokemonSort } from '../models/pokemons.model';
 import { SortType } from '../../models/filter.model';
+import { toogleSortFilterBySelects } from '../actions/pokemons.actions';
 import {
   loadPokemons,
   setPokemons,
@@ -74,6 +75,16 @@ const _pokemonReducer = createReducer(
     };
     return { ...state, filters };
   }),
+  on(toogleSortFilterBySelects, (state, { columnName, sortType }) => {
+    const sort: PokemonSort = {
+      columnName,
+      sortType
+    }
+    const filters: PokemonFilter = {
+      ...state.filters, sort, page: initialState.filters.page 
+    }
+    return { ...state, filters }
+  })
 );
 
 export function pokemonReducer(state: PokemonState, action: Action) {

@@ -81,6 +81,18 @@
 
 <ng-template #tableSmall>
   <div fxLayout="column" fxLayoutAlign="end">
+    <form [formGroup]="sortForm" fxLayout="row" fxLayoutGap="5px">
+      <mat-select formControlName="columnName">
+        <mat-option *ngFor="let option of sortByOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+      <mat-select formControlName="sortType">
+        <mat-option *ngFor="let sort of sortByType" [value]="sort">
+          {{ sort }}
+        </mat-option>
+      </mat-select>
+    </form>
     <div *ngFor="let pokemon of pokemons">
       <mat-card>
         <div fxLayout="row" fxLayoutAlign="space-between">

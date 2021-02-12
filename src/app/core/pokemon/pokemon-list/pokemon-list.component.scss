@@ -2,6 +2,10 @@
 @import '../../../../sass/variables.scss';
 
 :host {
+  @include selectStyle($primary-0, $white-0);
+  mat-select {
+    margin-bottom: 15px;
+  }
   table {
     @include white-box;
     th.mat-header-cell {

@@ -42,7 +42,9 @@ import { SortIndicatorComponent } from './components/sort-indicator/sort-indicat
     SortIndicatorComponent,
     MatCardModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    ReactiveFormsModule,
+    FormsModule, 
   ]
 })
 export class SharedModule { }

@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Pokemon } from '../../models/pokemon.model';
-import { SortPokemonColumn } from '../../models/filter.model';
+import { SortPokemonColumn, SortType } from '../../models/filter.model';
 
 export const loadPokemons = createAction(
   '[Pokemons] Load Pokemons'
@@ -24,4 +24,9 @@ export const setPaginatorFilter = createAction(
 export const toggleSortFilter = createAction(
   '[Pokemon] Toggle Sort Filter',
   props<{ columnName: SortPokemonColumn }>()
+);
+
+export const toogleSortFilterBySelects = createAction(
+  '[Pokemon] Toogle Sort Filter',
+  props<{ columnName: SortPokemonColumn, sortType: SortType }>()
 );
