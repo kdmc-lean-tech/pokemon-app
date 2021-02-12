@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_DOMAIN: 'http://localhost:8080/api/v1'
+  API_DOMAIN: 'http://pokemonapi-env.eba-mpv5tqkp.us-east-2.elasticbeanstalk.com/api/v1'
 };
 
 /*
