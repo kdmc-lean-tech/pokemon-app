@@ -12,3 +12,9 @@ export interface CreatedBy {
   _id: string;
   name: string;
 }
+
+export interface UserRequestBody {
+  name: string;
+  password: string;
+  email: string;
+}

@@ -9,13 +9,28 @@ export class NotificationService {
   constructor() { }
 
   public showError(message: string): void {
-    // The second parameter is the text in the button.
-    // In the third, we send in the css class for the snack bar.
-    // this.snackBar.open(message, 'X', {panelClass: ['error']});
     Swal.fire({
       icon: 'error',
       text: message,
-      title: 'error',
+      title: 'Error',
+      heightAuto: false,
+    });
+  }
+
+  public showSuccess(message: string) {
+    Swal.fire({
+      icon: 'success',
+      text: message,
+      title: 'Success',
+      heightAuto: false,
+    });
+  }
+
+  public showWarning(message: string) {
+    Swal.fire({
+      icon: 'warning',
+      text: message,
+      title: 'Warning',
       heightAuto: false,
     });
   }

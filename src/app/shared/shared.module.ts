@@ -13,12 +13,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortIndicatorComponent } from './components/sort-indicator/sort-indicator.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
     InputFieldComponent,
     PaginatorComponent,
-    SortIndicatorComponent
+    SortIndicatorComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { SortIndicatorComponent } from './components/sort-indicator/sort-indicat
     MatListModule,
     MatChipsModule,
     ReactiveFormsModule,
-    FormsModule, 
+    FormsModule,
+    ButtonComponent
   ]
 })
 export class SharedModule { }

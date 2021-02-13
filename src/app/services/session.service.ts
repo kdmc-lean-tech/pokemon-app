@@ -13,7 +13,12 @@ export class SessionService {
 
   get isLoggedIn(): boolean {
     const token = this.getToken();
-    return this.helper.isTokenExpired(token);
+    return token ?  true : false;
+  }
+
+  get tokenExpired(): boolean {
+    const token = this.getToken();
+    return this.helper.isTokenExpired(token)
   }
 
   public setSessionData(user: User, token: string) {

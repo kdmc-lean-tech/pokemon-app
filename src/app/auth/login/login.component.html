@@ -1,1 +1,59 @@
-<p>login works!</p>
+<div fxLayout="row" class="auth-container">
+  <div fxLayout="column" class="login-left">
+    <div class="auth-logo">
+      <img class="logo" src="assets/images/logo-pokemon.jpg" alt="logo">
+    </div>
+  </div>
+  <div fxLayout="column" class="auth-border" fxLayoutGap="125px">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <div class="auth-form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxFlex="500px">
+          <h1 class="auth-title">Welcome to Pokemon App,</h1>
+          <h3>Log into your Account</h3>
+          <div fxLayout="column" fxLayoutGap="37px">
+            <div>
+              <app-input-field [placeholder]="'E-Mail'" [type]="'email'" formControlName="email">
+              </app-input-field>
+              <div class="errors-container">
+                <ng-container *ngIf="email.errors && (email.dirty || email.touched)">
+                  <span *ngIf="email.errors?.required">The field is required</span>
+                  <span *ngIf="email.errors?.email">{{ email.errors.email.message }}</span>
+                </ng-container>
+              </div>
+            </div>
+            <div>
+              <app-input-field [placeholder]="'Password'" [type]="'password'" formControlName="password">
+              </app-input-field>
+              <div class="errors-container">
+                <ng-container *ngIf="password.errors && (password.dirty || password.touched)">
+                  <span *ngIf="password.errors?.required">The field is required</span>
+                  <span *ngIf="password.errors?.minlength">Minimum of 8 characters password</span>
+                </ng-container>
+              </div>
+            </div>
+            <app-button
+              [label]="'Login'"
+              [color]="'blue'"
+              [type]="'submit'"
+              [disabled]="form.invalid"
+            ></app-button>
+            <div fxLayout="row" fxLayoutAlign="flex-end">
+              <div>
+                <strong>
+                  <a class="forgot-password" (click)="goToForgotPassword()">Forgot password?</a>
+                </strong>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-end">
+              <div>
+                <strong>
+                  <a class="forgot-password" (click)="goToRegister()">Don't have an account?</a>
+                </strong>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

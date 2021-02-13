@@ -4,4 +4,5 @@ const API_URL = `${ environment.API_DOMAIN }`;
 
 export class ApiGateway {
   public static readonly POKEMONS = `${API_URL}/pokemon`;
+  public static readonly AUTH = `${API_URL}/auth`;
 }

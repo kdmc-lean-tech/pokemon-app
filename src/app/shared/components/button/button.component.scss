@@ -1,0 +1,40 @@
+@import '../../../../sass/variables.scss';
+
+:host button {
+  color: $white-0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  &.blue {
+    background-color: $primary-0;
+    border: 1px solid $primary-0;
+  }
+  &.light-blue {
+    background-color: $primary-1;
+    border: 1px solid $primary-1;
+  }
+  &.small {
+    height: 40px;
+  }
+  &.medium {
+    height: 50px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  &.large {
+    height: 60px;
+    font-weight: 400;
+    font-size: 18px;
+  }
+  &.extra-large {
+    height: 80px;
+    font-weight: 400;
+    font-size: 22px;
+  }
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: rgba(0,0,0,.26);
+    cursor: not-allowed;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+  }
+}

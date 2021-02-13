@@ -1,0 +1,61 @@
+@import '../../sass/variables.scss';
+@import '../../sass/mixins.scss';
+
+.auth-container {
+  height: 100%;
+  .login-left {
+    background: $primary-0;
+    height: 100%;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+  }
+  .auth-logo {
+    position: relative;
+    left: 120px;
+    bottom: 50px;
+    border-radius: 50px 0px 0px 50px;
+    background: $white-0;
+    height: 400px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    .logo {
+      width: auto;
+      height: 270px;
+      margin-top: 37px;
+      border-radius: 50px 0px 0px 50px;
+    }
+  }
+  .auth-border {
+    padding: 15px 150px 15px 150px;
+    justify-content: center;
+    width: 100%;
+    
+  .auth-form {
+    min-width: 350px;
+    margin-top: 30px;
+    .forgot-password {
+      text-decoration: none;
+      @include text(700, 20px, $primary-0);
+      cursor: pointer;
+    }
+    .auth-title {
+      @include text(700, 40px, $primary-0);
+      margin-bottom: 25px;
+    }
+    h3{
+      @include text(400, 32px, $primary-0);
+      margin-bottom: 50px;
+    }
+    .errors-container {
+      color: red;
+      height: 15px;
+      > span:not(:first-child) {
+        display: none;
+        }
+      }
+   }
+ }
+}

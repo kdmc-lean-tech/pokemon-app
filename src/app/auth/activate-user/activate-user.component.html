@@ -1,0 +1,19 @@
+<div fxLayout="row" class="auth-container">
+  <div fxLayout="column" class="login-left">
+    <div class="auth-logo">
+      <img class="logo" src="assets/images/logo-pokemon.jpg" alt="logo">
+    </div>
+  </div>
+  <div class="auth-border" fxLayout="column" fxLayoutAlign="center start">
+    <div class="auth-form">
+      <h1 class="auth-title">Welcome to Pokemon App,</h1>
+      <h3>{{ message }}</h3>
+    </div>
+    <app-button
+      [label]="'Continue to Login'"
+      [color]="'blue'"
+      [type]="'button'"
+      (click)="goToLogin()"
+    ></app-button>
+  </div>
+</div>
