@@ -6,4 +6,5 @@ export interface Paginator {
   sort: string;
   search: string;
   count: number;
+  len: number;
 }

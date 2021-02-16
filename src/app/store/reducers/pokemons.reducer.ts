@@ -14,13 +14,14 @@ export const initialState: PokemonState = {
   pokemons: [],
   filters: {
     page: 1,
-    itemPerPage: 10,
+    itemPerPage: 5,
     search: '',
     sort: { columnName: 'createdAt', sortType: 1 }
   },
   len: 0
-}
+};
 
+// tslint:disable-next-line: variable-name
 const _pokemonReducer = createReducer(
   initialState,
   on(loadPokemons, (state) => ({ ...state })),
@@ -29,18 +30,18 @@ const _pokemonReducer = createReducer(
       ...state,
       pokemons,
       len
-    }
+    };
   }),
   on(setPaginatorFilter, (state, { page, itemPerPage }) => {
     const filters: PokemonFilter = {
       ...state.filters,
       page,
       itemPerPage
-    }
+    };
     return {
       ...state,
       filters
-    }
+    };
   }),
   on(setSearchFilter, (state, { search }) => {
     const filters: PokemonFilter = {
@@ -48,11 +49,11 @@ const _pokemonReducer = createReducer(
       page: initialState.filters.page,
       itemPerPage: initialState.filters.itemPerPage,
       search
-    }
+    };
     return {
       ...state,
       filters
-    }
+    };
   }),
   on(toggleSortFilter, (state, { columnName }) => {
     const sortFilter = state.filters.sort;
@@ -79,11 +80,11 @@ const _pokemonReducer = createReducer(
     const sort: PokemonSort = {
       columnName,
       sortType
-    }
+    };
     const filters: PokemonFilter = {
-      ...state.filters, sort, page: initialState.filters.page 
-    }
-    return { ...state, filters }
+      ...state.filters, sort, page: initialState.filters.page
+    };
+    return { ...state, filters };
   })
 );
 

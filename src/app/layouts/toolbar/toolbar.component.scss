@@ -4,6 +4,10 @@
   min-height: 104px;
   padding: 25px 25px;
   color: $white-0;
+  .material-icons {
+    font-size: 30px;
+    cursor: pointer;
+  }
   background-color: $primary-0;
   .toolbar-title {
     .toolbar-text {

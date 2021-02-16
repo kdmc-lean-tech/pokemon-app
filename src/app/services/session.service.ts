@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Role } from '../models/role.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   private helper: JwtHelperService;
-  constructor() { 
+  constructor() {
     this.helper = new JwtHelperService();
+  }
+
+  get role(): Role {
+    const user: User = JSON.parse(localStorage.getItem('USER'));
+    return user.roleId;
   }
 
   get isLoggedIn(): boolean {
@@ -18,7 +24,7 @@ export class SessionService {
 
   get tokenExpired(): boolean {
     const token = this.getToken();
-    return this.helper.isTokenExpired(token)
+    return this.helper.isTokenExpired(token);
   }
 
   public setSessionData(user: User, token: string) {

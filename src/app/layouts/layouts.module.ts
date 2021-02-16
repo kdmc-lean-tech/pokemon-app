@@ -6,6 +6,8 @@ import { LayoutsComponent } from './layouts.component';
 import { SharedModule } from '../shared/shared.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { NgxLoadingModule } from 'ngx-loading';
+import { loadingConfiguration } from '../shared/constants/global.constants';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
   imports: [
     CommonModule,
     LayoutsRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxLoadingModule.forRoot(loadingConfiguration)
   ]
 })
 export class LayoutsModule { }

@@ -1,9 +1,11 @@
 
 <span [ngSwitch]="(size$ | async)">
-  <div *ngSwitchCase="'xs'">
+  <div *ngSwitchCase="'xs'" fxLayout="column" fxLayoutGap="25px">
+    <ng-container [ngTemplateOutlet]="search"></ng-container>
     <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
   </div>
-  <div *ngSwitchDefault>
+  <div *ngSwitchDefault fxLayout="column" fxLayoutGap="25px">
+    <ng-container [ngTemplateOutlet]="search"></ng-container>
     <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
   </div>
 </span>
@@ -75,7 +77,12 @@
     <tr mat-row *matRowDef="let row; columns: columns;"></tr>
   </table>
   <div fxLayout="row" fxLayoutAlign="end">
-    <app-paginator [page]="page" [pageSize]="itemPerPage" [len]="len" (pageEmitter)="filterByPage($event)"></app-paginator>
+    <app-paginator
+      [page]="page"
+      [pageSize]="itemPerPage"
+      [len]="len"
+      (pageEmitter)="filterByPage($event)"
+    ></app-paginator>
   </div>  
 </ng-template>
 
@@ -117,6 +124,18 @@
         </mat-list>
       </mat-card>
     </div>
-    <app-paginator [page]="page" [pageSize]="itemPerPage" [len]="len" (pageEmitter)="filterByPage($event)"></app-paginator>
+    <app-paginator
+      [page]="page"
+      [pageSize]="itemPerPage"
+      [len]="len"
+      (pageEmitter)="filterByPage($event)"
+    ></app-paginator>
   </div>  
+</ng-template>
+
+<ng-template #search>
+  <h1>Pokemon List</h1>
+  <div fxFlex="50" fxLayout="row" fxLayoutAlign.gt-lg="end" fxLayoutAlign.xs="center">
+    <app-input-search (emitValue)="searchPokemons($event)" [placeholder]="'Search for a Pokemon'"></app-input-search>
+  </div>
 </ng-template>

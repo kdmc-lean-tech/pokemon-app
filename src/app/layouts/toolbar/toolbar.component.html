@@ -1,4 +1,4 @@
-<div class="toolbar-container" fxLayout="row" fxLayoutAlign="start center">
+<div class="toolbar-container" fxLayout="row" fxLayoutAlign="space-between center">
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
     <div class="toolbar-toggle">
       <ng-content select="button"></ng-content>
@@ -8,5 +8,12 @@
         <h1>Pokemon App</h1>
       </div>
     </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <span
+      class="material-icons"
+      (click)="logout()">
+      logout
+    </span>
   </div>
 </div>

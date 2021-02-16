@@ -8,8 +8,11 @@
 		</mat-sidenav>
 		<mat-sidenav-content>
 			<div class="content">
-				<router-outlet></router-outlet>
+				<mat-card>
+					<router-outlet></router-outlet>
+				</mat-card>
 			</div>
 		</mat-sidenav-content>
 	</mat-sidenav-container>
 </ng-container>
+<ngx-loading [show]="isLoading" [config]="loadingConfiguration"></ngx-loading>

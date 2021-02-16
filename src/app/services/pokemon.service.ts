@@ -18,7 +18,7 @@ export class PokemonService {
     let params = new HttpParams()
       .set('page', `${page}`)
       .set('itemPerPage', `${itemPerPage}`)
-      .set('search', `${search}`)
+      .set('search', `${search}`);
 
     if (filters.sort) {
       const sortType = `{${sort.columnName}:${sort.sortType}}`;

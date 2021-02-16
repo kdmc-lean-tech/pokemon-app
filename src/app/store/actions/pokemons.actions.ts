@@ -1,4 +1,4 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, props } from '@ngrx/store';
 import { Pokemon } from '../../models/pokemon.model';
 import { SortPokemonColumn, SortType } from '../../models/filter.model';
 

@@ -27,7 +27,12 @@ export class PokemonEffects {
     mergeMap(([, { filters }]) => {
       return this.pokemonService.getPokemons(filters)
         .pipe(
-          map(({ body }) => setPokemons({ pokemons: body.results, len: body.paginator.count }))
+          map(({ body }) => setPokemons(
+            { 
+              pokemons: body.results,
+              len: body.paginator.count
+            }
+          ))
         )
     })
   ));

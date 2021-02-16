@@ -2,18 +2,23 @@
 @import '../../../../sass/variables.scss';
 
 :host {
+  h1 {
+    @include text(600, 30px, $primary-0);
+    margin-top: 25px;
+  }
   @include selectStyle($primary-0, $white-0);
   mat-select {
     margin-bottom: 15px;
   }
   table {
-    @include white-box;
+    box-shadow: none;
     th.mat-header-cell {
       @include text(400, 20px, $white-0);
       background-color: $primary-0;
     }
     td.mat-cell {
       @include text(400, 15px, $black-0);
+      padding: 25px 7px;
     }
   }
   mat-card {

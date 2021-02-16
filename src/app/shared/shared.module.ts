@@ -11,16 +11,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortIndicatorComponent } from './components/sort-indicator/sort-indicator.component';
 import { ButtonComponent } from './components/button/button.component';
+import { InputSearchComponent } from './components/input-search/input-search.component';
 
 @NgModule({
   declarations: [
     InputFieldComponent,
     PaginatorComponent,
     SortIndicatorComponent,
-    ButtonComponent
+    ButtonComponent,
+    InputSearchComponent
   ],
   imports: [
     CommonModule,
@@ -45,9 +48,11 @@ import { ButtonComponent } from './components/button/button.component';
     MatCardModule,
     MatListModule,
     MatChipsModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonComponent
+    ButtonComponent,
+    InputSearchComponent,
   ]
 })
 export class SharedModule { }

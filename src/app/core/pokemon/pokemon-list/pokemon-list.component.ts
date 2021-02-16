@@ -3,7 +3,7 @@ import { Pokemon } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription, Observable } from 'rxjs';
-import { loadPokemons, setPaginatorFilter, toggleSortFilter, toogleSortFilterBySelects } from '../../../store/actions/pokemons.actions';
+import { loadPokemons, setPaginatorFilter, toggleSortFilter, toogleSortFilterBySelects, setSearchFilter } from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonFilter } from '../../../store/models/pokemons.model';
 import { SortPokemonColumn } from '../../../models/filter.model';
@@ -23,6 +23,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   public page: number;
   public itemPerPage: number;
   public len: number;
+  public count: number;
   public filters: PokemonFilter;
   public size$: Observable<string>;
   public sortByOptions: { label: string, value: string }[] = [
@@ -80,6 +81,10 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   public toogleSortByColumn(columnName: SortPokemonColumn) {
     this.store.dispatch(toggleSortFilter({ columnName }));
+  }
+
+  public searchPokemons($event: string) {
+    this.store.dispatch(setSearchFilter({ search: $event }));
   }
 
   public listenSortControl() {

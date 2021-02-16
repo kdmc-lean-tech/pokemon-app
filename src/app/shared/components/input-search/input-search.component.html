@@ -1,0 +1,9 @@
+<div class="input-search-container" fxLayout="row" fxLayoutAlign="start start">
+  <input 
+      type="text"
+      [(ngModel)]="searchValue"
+      [placeholder]="placeholder"
+      (ngModelChange)="onDebouncedInput($event)"
+    >
+      <mat-icon>search</mat-icon>
+</div>

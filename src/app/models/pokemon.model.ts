@@ -1,6 +1,4 @@
 import { Base } from './base.model';
-import { PokemonType } from './pokemon-types.model';
-import { PokemonAbility } from './pokemon-abilities.model';
 import { PokemonStatistic } from './pokemon-statistics.model';
 import { CreatedBy } from './user.model';
 import { Paginator } from '../shared/models/paginator.model';

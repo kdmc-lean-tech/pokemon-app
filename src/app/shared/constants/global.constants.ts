@@ -1,3 +1,4 @@
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { Menu } from '../models/menu.model';
 
 export const menu: Menu[] = [
@@ -20,3 +21,13 @@ export const menu: Menu[] = [
     label: 'Chat'
   }
 ];
+
+export const loadingConfiguration = {
+  backdropBackgroundColour: 'rgba(248, 250, 251, 0.1)',
+  backdropBorderRadius: '4px',
+  primaryColour: 'rgb(0, 57, 120)',
+  secondaryColour: '#ffffff',
+  tertiaryColour: '#ffffff',
+  fullScreenBackdrop: true,
+  animationType: ngxLoadingAnimationTypes.circleSwish
+};

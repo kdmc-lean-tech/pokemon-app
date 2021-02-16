@@ -1,0 +1,13 @@
+@import '../../../../sass/mixins.scss';
+@import '../../../../sass/variables.scss';
+
+.input-search-container {
+  position: relative;
+  min-height: 65px;
+  @media screen and (max-width: 576px) {
+    @include input(250px, 50px);
+  }
+  @media screen and (min-width: 578px) {
+    @include input(650px, 50px);
+  }
+}

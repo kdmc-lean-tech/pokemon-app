@@ -24,9 +24,10 @@ export class AuthService {
     const body = {
       email,
       password
-    }
+    };
     return this.http.post<SessionResponse>(`${url}`, body)
       .pipe(
+        // tslint:disable-next-line: no-shadowed-variable
         tap(({ body }) => {
           const { user, token } = body;
           this.sessionService.setSessionData(user, token);
@@ -37,6 +38,7 @@ export class AuthService {
 
   public logout() {
     this.sessionService.clearData();
+    this.router.navigate(['auth']);
   }
 
   public recoveryPassword(email: string): Observable<any> {
