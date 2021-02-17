@@ -57,7 +57,8 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public connect(): void {
-    this.socket.ioSocket.io.opts.query = { token: this.sessionService.getToken() };
+    const token = this.sessionService.getToken();
+    this.socket.ioSocket.io.opts.query = { token };
     this.socket.connect();
   }
 

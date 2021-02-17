@@ -12,10 +12,12 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { httpInterceptorProviders } from './interceptors/index';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { NgxLoadingModule } from 'ngx-loading';
-import { loadingConfiguration } from './shared/constants/global.constants';
 
-const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {} };
+const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {
+  query: {
+    token: localStorage.getItem('TOKEN')
+  }
+}};
 
 @NgModule({
   declarations: [

@@ -5,6 +5,7 @@ import { Role } from '../models/role.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/models/app.model';
 import { setUser } from '../store/actions/auth.actions';
+import { setPokemons } from 'src/app/store/actions/pokemons.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -56,10 +57,13 @@ export class SessionService {
   }
 
   public clearStore() {
+    this.store.dispatch(setUser({ token: null, user: null }));
+    this.store.dispatch(setPokemons({ pokemons: [], len: 0 }));
   }
 
   public clearData() {
     localStorage.removeItem('USER');
     localStorage.removeItem('TOKEN');
+    this.clearStore();
   }
 }
