@@ -3,13 +3,19 @@
     <div class="toolbar-toggle">
       <ng-content select="button"></ng-content>
     </div>
-    <div class="toolbar-title" fxLayout="row">
+    <div class="toolbar-title" fxLayout="row" fxLayoutGap="15px">
       <div class="toolbar-text" fxLayout="row" fxLayoutAlign="center center">
         <h1>Pokemon App</h1>
       </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <app-socket-indicator></app-socket-indicator>
+      </div>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+    <div class="toolbar-username" fxLayoutAlign="center center" fxLayout="row">
+      <h1>{{ username }}</h1>
+    </div>
     <span
       class="material-icons"
       (click)="logout()">

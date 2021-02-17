@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortIndicatorComponent } from './components/sort-indicator/sort-indicator.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
+import { SocketIndicatorComponent } from './components/socket-indicator/socket-indicator.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { InputSearchComponent } from './components/input-search/input-search.com
     PaginatorComponent,
     SortIndicatorComponent,
     ButtonComponent,
-    InputSearchComponent
+    InputSearchComponent,
+    SocketIndicatorComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { InputSearchComponent } from './components/input-search/input-search.com
     FormsModule,
     ButtonComponent,
     InputSearchComponent,
+    SocketIndicatorComponent
   ]
 })
 export class SharedModule { }

@@ -4,7 +4,7 @@ import { setUser } from '../actions/auth.actions';
 
 const initialState: AuthState = {
   user: null,
-  token: ''
+  token: null
 };
 
 // tslint:disable-next-line: variable-name

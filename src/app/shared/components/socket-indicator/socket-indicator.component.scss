@@ -1,0 +1,10 @@
+@import '../../../../sass/variables.scss';
+
+.socket-indicator-container {
+  &.connect {
+    color: $green-0;
+  }
+  &.disconnect {
+    color: $red-0;
+  }
+}

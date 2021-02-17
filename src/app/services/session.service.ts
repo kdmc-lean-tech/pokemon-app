@@ -5,7 +5,6 @@ import { Role } from '../models/role.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/models/app.model';
 import { setUser } from '../store/actions/auth.actions';
-import { setPokemons } from 'src/app/store/actions/pokemons.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,11 @@ export class SessionService {
   private helper: JwtHelperService;
   constructor(private store: Store<AppState>) {
     this.helper = new JwtHelperService();
+    const token = this.getToken();
+    const user = this.getUser();
+    if (token && user) {
+      this.store.dispatch(setUser({ token, user }));
+    }
   }
 
   get role(): Role {
@@ -34,21 +38,28 @@ export class SessionService {
   public setSessionData(user: User, token: string) {
     localStorage.setItem('USER', JSON.stringify(user));
     localStorage.setItem('TOKEN', token);
-    this.store.dispatch(setUser({ user, token }));
+    this.setAuthInStore();
   }
 
   public getToken(): string | null {
     return localStorage.getItem('TOKEN');
   }
 
+  public getUser(): User {
+    return JSON.parse(localStorage.getItem('USER'));
+  }
+
+  public setAuthInStore() {
+    const token = this.getToken();
+    const user = JSON.parse(localStorage.getItem('USER'));
+    this.store.dispatch(setUser({ user, token }));
+  }
+
   public clearStore() {
-    this.store.dispatch(setUser({ user: null, token: '' }));
-    this.store.dispatch(setPokemons({ pokemons: [], len: 0 }));
   }
 
   public clearData() {
     localStorage.removeItem('USER');
     localStorage.removeItem('TOKEN');
-    this.clearStore();
   }
 }
