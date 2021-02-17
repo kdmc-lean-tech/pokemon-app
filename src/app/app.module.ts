@@ -14,9 +14,9 @@ import { httpInterceptorProviders } from './interceptors/index';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {
-  query: {
-    token: localStorage.getItem('TOKEN')
-  }
+  // query: {
+  //   token: localStorage.getItem('TOKEN')
+  // }
 }};
 
 @NgModule({
