@@ -1,0 +1,22 @@
+<div class="message-container">
+  <div class="message-history" fxLayout="column">
+    <ng-scrollbar #scrollable>
+      <div *ngIf="activeChat">
+        <div *ngFor="let message of messages" class="message-box">
+          <app-incoming-message *ngIf="message.of === sessionService.getUser()?._id" [message]="message"></app-incoming-message>
+          <app-outgoing-message *ngIf="message.of !== sessionService.getUser()?._id" [message]="message"></app-outgoing-message>
+        </div>
+      </div>
+      <div #endOfMessages></div>
+    </ng-scrollbar>
+    <div *ngIf="!activeChat">
+      <ng-container [ngTemplateOutlet]="noActiveChat"></ng-container>
+    </div>
+  </div>
+  <div class="message-input">
+    <app-send-message></app-send-message>
+  </div>
+</div>
+
+<ng-template #noActiveChat>
+</ng-template>

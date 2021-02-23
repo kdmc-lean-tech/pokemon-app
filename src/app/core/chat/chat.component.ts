@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserRtService } from '../../services/user-rt.service';
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userRtService: UserRtService) { }
 
   ngOnInit(): void {
   }
 
+  public searchUsers($event) {
+    this.userRtService.getUsers($event);
+  }
 }

@@ -1,0 +1,16 @@
+@import '../../../../../sass/mixins.scss';
+@import '../../../../../sass/variables.scss';
+
+:host {
+  h5 {
+    @include text(400, 18px, $primary-0);
+  }
+}
+
+.pokemon-form-container {
+  height: 400px;
+  overflow: auto;
+  background: url('https://i.pinimg.com/originals/38/34/d3/3834d3b2b48bccb9a5cff334286cd5fd.png') fixed no-repeat;
+  background-position: right center;
+  background-size: 350px;
+}

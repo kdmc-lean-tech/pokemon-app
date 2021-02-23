@@ -1,0 +1,27 @@
+@import '../../../../sass/mixins.scss';
+@import '../../../../sass/variables.scss';
+
+.box3 {
+  width: 400px;
+  margin: 50px;
+  margin-left: 50%;
+  border-radius: 15px;
+  background: $primary-5;
+  color: $white-0;
+  padding: 20px;
+  text-align: start;
+  position: relative;
+}
+
+.sb14:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid $primary-5;
+  border-top: 15px solid $primary-5;
+  border-bottom: 15px solid transparent;
+  left: -16px;
+  top: 0px;
+}

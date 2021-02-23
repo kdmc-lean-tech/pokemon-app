@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PokemonComponent } from './pokemon.component';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { RoleGuard } from '../../guards/role.guard';
+import { CreatePokemonComponent } from 'src/app/core/pokemon/create-pokemon/create-pokemon.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: '',
         component: PokemonListComponent
+      },
+      {
+        path: 'add-pokemon',
+        component: CreatePokemonComponent
       }
     ]
   }

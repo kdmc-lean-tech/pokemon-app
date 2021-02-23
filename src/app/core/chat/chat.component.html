@@ -1,61 +1,15 @@
-<div class="messaging">
-  <div class="inbox_msg">
-
+<div class="chat-container" fxLayout="column">
+  <h1>Pokemon Chat</h1>
+  <app-input-search
+      [placeholder]="'Search a user'"
+      (emitValue)="searchUsers($event)"
+  ></app-input-search>
+  <div fxFlex="100" fxLayoutGap="25px">
+    <div class="inbox-people" fxFlex="30">
       <app-inbox-people></app-inbox-people>
-
-      <!-- Chat inicio -->
-      <div class="mesgs">
-
-          <!-- Historia inicio -->
-          <div class="msg_history">
-
-              <!-- Mensaje recibido Inicio -->
-              <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                      <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" />
-                  </div>
-                  <div class="received_msg">
-                      <div class="received_withd_msg">
-                          <p>Test which is a new approach to have all
-                              solutions</p>
-                          <span class="time_date"> 11:01 AM | June 9</span>
-                      </div>
-                  </div>
-              </div>
-              <!-- Mensaje recibido Fin -->
-
-              <!-- Mensaje enviado inicio -->
-              <div class="outgoing_msg">
-                  <div class="sent_msg">
-                      <p>Test which is a new approach to have all
-                          solutions</p>
-                      <span class="time_date"> 11:01 AM | June 9</span>
-                  </div>
-              </div>
-              <!-- Mensaje enviado inicio -->
-
-              
-
-          </div>
-          <!-- Historia Fin -->
-
-          <!-- Enviar mensaje Inicio -->
-          <div class="type_msg row">
-              <div class="input_msg_write col-sm-9">
-                  <input type="text" class="write_msg" placeholder="Mensaje..." />
-              </div>
-              <div class="col-sm-3 text-center">
-                  <button class="msg_send_btn mt-3" type="button">
-                      enviar
-                  </button>
-              </div>
-          </div>
-          <!-- Enviar mensaje Fin -->
-
-      </div>
-      <!-- Chat Fin -->
-
+    </div>
+    <div class="messages" fxFlex="65">
+      <app-messages></app-messages>
+    </div>
   </div>
-
-
 </div>

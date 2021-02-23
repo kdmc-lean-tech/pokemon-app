@@ -1,0 +1,18 @@
+<div class="send-message-container">
+  <form [formGroup]="form" fxLayout="column" fxFlex="100" fxLayoutGap="8px">
+    <div class="send-message-input">
+      <angular-editor formControlName="message" [config]="editorConfig"></angular-editor>
+    </div>
+    <div fxFlex="100" fxLayoutAlign="center">
+      <app-button
+        fxFlex="50"
+        [label]="'Send'"
+        [size]="'small'"
+        [color]="'blue'"
+        [type]="'button'"
+        (click)="onSubmit()"
+        [disabled]="form.invalid || chatMessage === null"
+      ></app-button>
+    </div>
+  </form>
+</div>

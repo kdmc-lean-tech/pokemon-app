@@ -3,12 +3,19 @@ import { Pokemon } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription, Observable } from 'rxjs';
-import { loadPokemons, setPaginatorFilter, toggleSortFilter, toogleSortFilterBySelects, setSearchFilter } from '../../../store/actions/pokemons.actions';
+import {
+  loadPokemons,
+  setPaginatorFilter,
+  toggleSortFilter,
+  toogleSortFilterBySelects,
+  setSearchFilter
+} from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonFilter } from '../../../store/models/pokemons.model';
 import { SortPokemonColumn } from '../../../models/filter.model';
 import { BreakpointObserverService } from '../../../services/breakpoint-observer.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -18,7 +25,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class PokemonListComponent implements OnInit, OnDestroy {
   public pokemons: Pokemon[];
   private subscriptions = new Subscription();
-  public columns: string[] = ['pokedex', 'name', 'generation', 'created', 'date'];
+  public columns: string[] = ['photo', 'pokedex', 'name', 'generation', 'created', 'date'];
   public dataSource: MatTableDataSource<Pokemon>;
   public page: number;
   public itemPerPage: number;
@@ -39,7 +46,8 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private breakpointObserverService: BreakpointObserverService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.size$ = this.breakpointObserverService.size$;
   }
@@ -95,6 +103,10 @@ export class PokemonListComponent implements OnInit, OnDestroy {
         this.store.dispatch(toogleSortFilterBySelects({ columnName, sortType: sortTypeFormat }));
       })
     );
+  }
+
+  public goToCreatePokemon() {
+    this.router.navigate(['pokemon/add-pokemon']);
   }
 
   ngOnDestroy() {

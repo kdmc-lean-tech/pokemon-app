@@ -1,1 +1,26 @@
-<p>create-pokemon works!</p>
+<div class="create-pokemon-container">
+  <h1>Create Pokemon</h1>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Create your pokemon</ng-template>
+      <div fxLayout="column" fxLayoutGap="50px">
+        <app-pokemon-form></app-pokemon-form>
+        <app-button [label]="'Next'" (submitted)="stepper.next()"></app-button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Add statistics to your pokemon</ng-template>
+      <div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Save your pokemon</ng-template>
+      <div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

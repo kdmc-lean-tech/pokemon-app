@@ -22,10 +22,18 @@ export interface PokemonDetail extends Pokemon {
 }
 
 export interface PokemonResponse {
-  body: PokemonResponseBody; 
+  body: PokemonResponseBody;
 }
 
 export interface PokemonResponseBody {
   results: Pokemon[];
   paginator: Paginator;
+}
+
+export interface PokemonAbility extends Base {
+  name: string;
+}
+
+export interface PokemonTypes extends Base {
+  name: string;
 }

@@ -17,6 +17,10 @@ import { SortIndicatorComponent } from './components/sort-indicator/sort-indicat
 import { ButtonComponent } from './components/button/button.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { SocketIndicatorComponent } from './components/socket-indicator/socket-indicator.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import { SocketIndicatorComponent } from './components/socket-indicator/socket-i
     FormsModule,
     ButtonComponent,
     InputSearchComponent,
-    SocketIndicatorComponent
+    SocketIndicatorComponent,
+    AngularEditorModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    NgScrollbarModule,
   ]
 })
 export class SharedModule { }

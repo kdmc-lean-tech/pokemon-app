@@ -1,7 +1,13 @@
-<!-- Sidebar inicio -->
-<div class="inbox_chat">
-  <app-user-chat></app-user-chat>
-  <!-- Espacio extra para scroll -->
-  <div class="extra_space"></div>
+<div class="inbox-chat-container">
+  <ng-scrollbar #scrollable>
+    <div *ngFor="let user of users" class="inbox-chat-contacts">
+      <div class="inbox-chat-contact">
+        <app-user-chat
+          [active]="user._id === userSelected"
+          [user]="user"
+          (userSelected)="setUserChat($event)"
+        ></app-user-chat>
+      </div>
+    </div>  
+  </ng-scrollbar>
 </div>
-<!-- Sidebar Fin -->

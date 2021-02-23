@@ -1,0 +1,14 @@
+@import '../../../../sass/mixins.scss';
+@import '../../../../sass/variables.scss';
+
+.message-container {
+  .message-history {
+    height: 350px;
+    border-radius: 5px;
+    overflow: auto;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    background: url('https://pm1.narvii.com/6259/bed8cd85eb3fb347879c0474c3c7ad11bc351e49_hq.jpg') no-repeat;
+    background-position: center;
+  }
+}

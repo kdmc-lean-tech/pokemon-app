@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (request.url.indexOf(environment.API_DOMAIN) === 0 && this.sessionService.isLoggedIn) {
       const token = this.sessionService.getToken();
       const clonedReq = request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token}`)
+        headers: request.headers.set('token', token)
       });
       return next.handle(clonedReq);
     }

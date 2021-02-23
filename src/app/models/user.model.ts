@@ -6,6 +6,12 @@ export interface User extends Base {
   email: string;
   password: string;
   roleId: Role;
+  online: boolean;
+}
+
+export interface UserChat extends Base {
+  name: string;
+  online: boolean;
 }
 
 export interface CreatedBy {

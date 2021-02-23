@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { createEffect, ofType, Actions } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
+import { Injectable } from '@angular/core';
+import { createEffect, ofType, Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { PokemonService } from '../../services/pokemon.service';
 import { AppState } from '../models/app.model';
 import {
@@ -22,18 +22,24 @@ export class PokemonEffects {
   ) {}
 
   loadPokemons$ = createEffect(() => this.actions$.pipe(
-    ofType(loadPokemons, setPaginatorFilter, setSearchFilter, toggleSortFilter, toogleSortFilterBySelects),
+    ofType(
+      loadPokemons,
+      setPaginatorFilter,
+      setSearchFilter,
+      toggleSortFilter,
+      toogleSortFilterBySelects
+    ),
     withLatestFrom(this.store.select('pokemons')),
     mergeMap(([, { filters }]) => {
       return this.pokemonService.getPokemons(filters)
         .pipe(
           map(({ body }) => setPokemons(
-            { 
+            {
               pokemons: body.results,
               len: body.paginator.count
             }
           ))
-        )
+        );
     })
   ));
 }
