@@ -21,6 +21,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { DebounceInputDirective } from './directives/debounce-input.directive';
+import { NotifierComponent } from './components/notifier/notifier.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     SortIndicatorComponent,
     ButtonComponent,
     InputSearchComponent,
-    SocketIndicatorComponent
+    SocketIndicatorComponent,
+    DebounceInputDirective,
+    NotifierComponent
   ],
   imports: [
     CommonModule,

@@ -12,6 +12,7 @@ import { setPokemons } from 'src/app/store/actions/pokemons.actions';
 })
 export class SessionService {
   private helper: JwtHelperService;
+
   constructor(private store: Store<AppState>) {
     this.helper = new JwtHelperService();
     const token = this.getToken();

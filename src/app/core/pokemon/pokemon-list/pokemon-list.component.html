@@ -144,7 +144,7 @@
 <ng-template #search>
   <h1>Pokemon List</h1>
   <div fxFlex="50" fxLayout="row" fxLayoutAlign.gt-lg="end" fxLayoutAlign.xs="center" fxLayoutGap="15px">
-    <app-input-search (emitValue)="searchPokemons($event)" [placeholder]="'Search for a Pokemon'"></app-input-search>
+    <app-input-search (valueChanged)="searchPokemons($event)" [placeholder]="'Search for a Pokemon'"></app-input-search>
     <app-button [label]="'Create Pokemon'" (submitted)="goToCreatePokemon()"></app-button>
   </div>
 </ng-template>

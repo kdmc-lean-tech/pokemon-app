@@ -12,6 +12,7 @@ export interface User extends Base {
 export interface UserChat extends Base {
   name: string;
   online: boolean;
+  totalMessages: number;
 }
 
 export interface CreatedBy {
@@ -23,4 +24,9 @@ export interface UserRequestBody {
   name: string;
   password: string;
   email: string;
+}
+
+export interface JoinChat {
+  of: string;
+  to: string;
 }

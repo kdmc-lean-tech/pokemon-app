@@ -13,7 +13,7 @@ const _socketReducer = createReducer(initialState,
       ...state,
       online
     };
-  }),
+  })
 );
 
 export function socketReducer(state: SocketState, action: Action) {

@@ -20,7 +20,7 @@ import { loadingConfiguration } from '../shared/constants/global.constants';
     CommonModule,
     LayoutsRoutingModule,
     SharedModule,
-    NgxLoadingModule.forRoot(loadingConfiguration)
+    NgxLoadingModule.forRoot(loadingConfiguration),
   ]
 })
 export class LayoutsModule { }

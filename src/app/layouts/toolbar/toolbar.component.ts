@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sessionService: SessionService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.username = this.sessionService.getUser().name;

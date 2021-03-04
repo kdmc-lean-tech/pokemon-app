@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserChat } from '../../../models/user.model';
 
 @Component({
@@ -14,5 +14,9 @@ export class UserChatComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public userSelectedEmit(userSelected) {
+    this.userSelected.emit(userSelected);
   }
 }

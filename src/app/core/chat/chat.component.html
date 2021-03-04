@@ -2,7 +2,7 @@
   <h1>Pokemon Chat</h1>
   <app-input-search
       [placeholder]="'Search a user'"
-      (emitValue)="searchUsers($event)"
+      (valueChanged)="searchUsers($event)"
   ></app-input-search>
   <div fxFlex="100" fxLayoutGap="25px">
     <div class="inbox-people" fxFlex="30">

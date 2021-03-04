@@ -11,7 +11,7 @@
         [color]="'blue'"
         [type]="'button'"
         (click)="onSubmit()"
-        [disabled]="form.invalid || chatMessage === null"
+        [disabled]="form.invalid || !userSelected"
       ></app-button>
     </div>
   </form>

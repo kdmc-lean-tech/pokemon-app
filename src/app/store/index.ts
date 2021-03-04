@@ -6,12 +6,15 @@ import { PokemonEffects } from './effects/pokemon.effects';
 import { uiReducer } from './reducers/ui.reducer';
 import { authReducer } from './reducers/auth.reducer';
 import { socketReducer } from './reducers/socket.reducer';
+import { chatReducer } from './reducers/chat.reducer';
+
 
 export const reducers: ActionReducerMap<AppState> = {
   pokemons: pokemonReducer,
   ui: uiReducer,
   auth: authReducer,
-  socket: socketReducer
+  socket: socketReducer,
+  chat: chatReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];

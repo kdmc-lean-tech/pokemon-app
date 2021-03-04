@@ -12,12 +12,9 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { httpInterceptorProviders } from './interceptors/index';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { ToastrModule } from 'ngx-toastr';
 
-const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {
-  query: {
-    token: localStorage.getItem('TOKEN')
-  }
-}};
+const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {} };
 
 @NgModule({
   declarations: [
@@ -31,9 +28,11 @@ const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot(effects),
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    ToastrModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
