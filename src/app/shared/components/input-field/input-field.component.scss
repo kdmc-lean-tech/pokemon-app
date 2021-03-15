@@ -1,10 +1,18 @@
 @import '../../../../sass//variables.scss';
 @import '../../../../sass/mixins.scss';
 
-.input-container {
+@mixin input-text {
   span {
     @include text(700, 20px, $black-0);
   }
+}
+
+.input-container-a {
+  display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  @include input-text;
   input {
     font-family: inherit;
     width: 100%;
@@ -16,4 +24,58 @@
     background: transparent;
     transition: border-color 0.2s;
   }
+}
+
+.input-container-b {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	.input {	
+		@include input-text;
+		&__field {
+			width: 250px;
+			background: #fff;
+			color: $gray-0;
+			font: inherit;
+			box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+			border: 0;
+			outline: 0;
+			padding: 22px 18px;
+		}
+	}
+	.btn {
+		width: 150px;
+		display: inline-block;
+		background: transparent;
+		color: inherit;
+		font: inherit;
+		border: 0;
+		outline: 0;
+		padding: 0;
+		transition: all 200ms ease-in;
+		cursor: pointer;
+		font-size: 15px;
+	
+		&--primary {
+			background: $primary-0;
+			color: $white-0;
+			box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
+			border-radius: 2px;
+			padding: 12px 36px;
+			
+			&:hover {
+				background: darken($primary-0, 4%);
+			}
+			
+			&:active {
+				background: $primary-0;
+				box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, .2);
+			}
+		}
+		
+		&--inside {
+			margin-left: -96px;
+		}
+	}	
 }

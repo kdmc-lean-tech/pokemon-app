@@ -4,22 +4,48 @@
     <mat-step>
       <ng-template matStepLabel>Create your pokemon</ng-template>
       <div fxLayout="column" fxLayoutGap="50px">
-        <app-pokemon-form></app-pokemon-form>
-        <app-button [label]="'Next'" (submitted)="stepper.next()"></app-button>
+        <app-pokemon-form #pokemonForm></app-pokemon-form>
+        <app-button
+          [label]="'Next'"
+          (submitted)="stepper.next()"
+          [disabled]="!pokemonFormValid"
+        ></app-button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Add statistics to your pokemon</ng-template>
-      <div>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      <div fxLayout="column" fxLayoutGap="50px">
+        <app-statistics-form #statisticsForm></app-statistics-form>
+      </div>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <app-button
+          [label]="'Back'"
+          (submitted)="stepper.previous()"
+        ></app-button>
+        <app-button
+          [label]="'Next'"
+          (submitted)="stepper.next()"
+          [disabled]="!statisticsFormValid"
+        ></app-button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Save your pokemon</ng-template>
+      <div fxLayout="column" fxLayoutGap="50px">
+        <app-upload-pokemon-image #uploadPokemonForm></app-upload-pokemon-image>
+      </div>
       <div>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" (click)="stepper.reset()">Reset</button>
+        <div fxLayout="row" fxLayoutGap="25px">
+          <app-button
+            [label]="'Back'"
+            (submitted)="stepper.previous()"
+          ></app-button>
+          <app-button
+            [label]="'Save Pokemon'"
+            (submitted)="onSubmit()"
+            [disabled]="!uploadFormValid"
+          ></app-button>
+        </div>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

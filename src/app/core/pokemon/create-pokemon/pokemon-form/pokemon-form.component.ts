@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../../services/pokemon.service';
-import { PokemonAbility, PokemonTypes } from '../../../../models/pokemon.model';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PokemonAbility, PokemonCategory, PokemonTypes } from '../../../../models/pokemon.model';
+import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 
 @Component({
@@ -12,14 +12,16 @@ import { combineLatest } from 'rxjs';
 export class PokemonFormComponent implements OnInit {
   public pokemonAbilities: PokemonAbility[];
   public pokemonTypes: PokemonTypes[];
+  public pokemonCategories: PokemonCategory[];
   public form: FormGroup;
 
   constructor(
     private pokemonService: PokemonService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.createForm();
     this.getPokemonAbilitiesAndTypes();
   }
 
@@ -27,12 +29,13 @@ export class PokemonFormComponent implements OnInit {
     combineLatest(
       [
         this.pokemonService.getPokemonAbilities(),
-        this.pokemonService.getPokemonTypes()
+        this.pokemonService.getPokemonTypes(),
+        this.pokemonService.getPokemonCategories()
       ]
-    ).subscribe(([pokemonAbilities, pokemonTypes]) => {
+    ).subscribe(([pokemonAbilities, pokemonTypes, pokemonCategories]) => {
       this.pokemonAbilities = pokemonAbilities.results;
       this.pokemonTypes = pokemonTypes.results;
-      this.createForm();
+      this.pokemonCategories = pokemonCategories.results;
     });
   }
 
@@ -42,22 +45,47 @@ export class PokemonFormComponent implements OnInit {
       isLegendary: new FormControl(false, [Validators.required]),
       generation: new FormControl(null, [Validators.required]),
       weight: new FormControl(null, [Validators.required]),
-      types: new FormArray([]),
       pokedexNumber: new FormControl(null, [Validators.required]),
-      japaneseName: new FormControl(null, [Validators.required]),
       height: new FormControl(null, [Validators.required]),
-      abilities: new FormArray([])
-    });
-    this.form.valueChanges.subscribe(val => {
-      console.log(val);
+      types: new FormControl(null, [Validators.required]),
+      abilities: new FormControl(null, [Validators.required]),
+      categories: new FormControl(null, [Validators.required])
     });
   }
 
   get types() {
-    return this.form.get('types') as FormArray;
+    return this.form.get('types') as FormControl;
   }
 
   get abilities() {
-    return this.form.get('abilities') as FormArray;
+    return this.form.get('abilities') as FormControl;
+  }
+
+  get categories() {
+    return this.form.get('categories') as FormControl;
+  }
+
+  get name() {
+    return this.form.get('name') as FormControl;
+  }
+
+  get isLegendary() {
+    return this.form.get('isLegendary') as FormControl;
+  }
+
+  get generation() {
+    return this.form.get('generation') as FormControl;
+  }
+
+  get weight() {
+    return this.form.get('weight') as FormControl;
+  }
+
+  get pokedexNumber() {
+    return this.form.get('pokedexNumber') as FormControl;
+  }
+
+  get height() {
+    return this.form.get('height') as FormControl;
   }
 }

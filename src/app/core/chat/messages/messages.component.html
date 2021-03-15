@@ -2,8 +2,8 @@
   <div class="message-history" fxLayout="column">
     <ng-scrollbar #scrollable>
       <div *ngFor="let message of messages" class="message-box">
-        <app-incoming-message *ngIf="message.of !== sessionService.getUser()?._id" [message]="message"></app-incoming-message>
-        <app-outgoing-message *ngIf="message.of === sessionService.getUser()?._id" [message]="message"></app-outgoing-message>
+        <app-incoming-message *ngIf="message.of._id !== sessionService.getUser()?._id" [message]="message"></app-incoming-message>
+        <app-outgoing-message *ngIf="message.of._id === sessionService.getUser()?._id" [message]="message"></app-outgoing-message>
       </div>
       <div #endOfMessages></div>
     </ng-scrollbar>

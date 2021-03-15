@@ -7,6 +7,7 @@ import { ChatMessage } from '../../../models/message.model';
 import { MessageService } from '../../../services/message.service';
 import { ChatService } from '../../../services/chat.service';
 import { NEW_MESSAGE_EVENT } from '../../../shared/constants/socket-events.constants';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-send-message',
@@ -17,7 +18,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   private subscriptions = new Subscription();
   public chatMessage: ChatMessage;
-  public editorConfig = editorConfig;
+  public editorConfig: AngularEditorConfig;
   public userSelected: string;
 
   constructor(
@@ -26,6 +27,9 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private chatService: ChatService
   ) {
+    const angularEditorConfig = editorConfig;
+    angularEditorConfig.height = '80px';
+    this.editorConfig = angularEditorConfig;
   }
 
   ngOnInit(): void {

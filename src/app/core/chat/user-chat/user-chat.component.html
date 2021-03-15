@@ -1,12 +1,21 @@
 <div class="user-chat-container" fxLayout="row" (click)="userSelectedEmit(user._id)"
   [class.active]="active">
   <div class="user-chat-img" fxLayout="row" fxLayoutAlign="center center">
-      <img src="https://www.revistacambio.com.mx/wp-content/uploads/2020/03/76479dd91dc55c2768ddccfc30a4fbf5.png" alt="sunil" />
+      <img *ngIf="user?.avatar" [src]="user?.avatar.url">
+      <img *ngIf="!user?.avatar" src="https://www.revistacambio.com.mx/wp-content/uploads/2020/03/76479dd91dc55c2768ddccfc30a4fbf5.png" alt="sunil" />
   </div>
-  <div class="user-chat-detail" fxLayout="column" fxLayoutAlign="center center">
+  <div
+    class="user-chat-detail"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    [matBadge]="user.totalMessages"
+    matBadgeColor="warn"
+    matBadgePosition="above before"
+    matBadgeSize="large"
+    [matBadgeHidden]="user.totalMessages === 0"
+    >
       <h1>{{ user.name | titlecase }}</h1>
       <span class="text-success" *ngIf="user.online"><i>Online</i></span>
       <span class="text-danger" *ngIf="!user.online"><i>Offline</i></span>
-      <span>{{ user.totalMessages }}</span>
   </div>
 </div>

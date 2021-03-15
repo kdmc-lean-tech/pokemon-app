@@ -1,0 +1,18 @@
+<div class="upload-pokemon-container">
+  <form [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutGap="15px"
+    fxLayoutAlign="space-between start">
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+      <img *ngIf="!previuosFile" src="https://res.cloudinary.com/drc3hn2yj/image/upload/v1606439333/unnamed_qfq5h7.jpg" alt="sunil" />
+      <img *ngIf="previuosFile" [src]="previuosFile" alt="upload-image">
+      <app-file-upload formControlName="file"></app-file-upload>
+    </div>
+    <div fxLayout="column" fxLayoutGap="5px" fxFlex="45">
+      <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+      <div class="errors-container">
+        <ng-container *ngIf="description.errors && (description.dirty || description.touched)">
+          <span *ngIf="description.errors?.required">The field is required</span>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</div>

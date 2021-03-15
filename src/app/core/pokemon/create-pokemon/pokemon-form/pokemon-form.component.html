@@ -1,30 +1,115 @@
 <div class="pokemon-form-container">
-  <form [formGroup]="form" fxLayout="column" fxLayoutGap="50px">
-    <!-- <div fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="space-between center">
-      <app-input-field [placeholder]="'Name'"></app-input-field>
-      <app-input-field [placeholder]="'Generation'"></app-input-field>
-    </div>
-    <div fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="space-between center">
-      <app-input-field [placeholder]="'Weight'"></app-input-field>
-      <app-input-field [placeholder]="'Pokedex Number'"></app-input-field>
-    </div>
-    <div class="japanese-name">
-      <app-input-field [placeholder]="'Japanese Name'"></app-input-field>
-    </div>
-    <div class="pokemon-abilities">
-      <h5>Pokemon Abilities</h5>
-      <div *ngFor="let ability of pokemonAbilities" fxLayout="column">
-        <mat-checkbox>{{ ability?.name | titlecase }}</mat-checkbox>
+  <ng-scrollbar #scrollable>
+    <form [formGroup]="form" fxLayout="column" fxLayoutGap="50px">
+      <div fxLayout="row" fxFlex="100">
+        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+          <app-input-field
+            [placeholder]="'Name....'"
+            [design]="'B'"
+            [label]="'Name'"
+            formControlName="name"
+          ></app-input-field>
+          <div class="errors-container">
+            <ng-container *ngIf="name.errors && (name.dirty || name.touched)">
+              <span *ngIf="name.errors?.required">The field is required</span>
+            </ng-container>
+          </div>
+        </div>
+        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+          <app-input-field
+            [placeholder]="'Generation....'"
+            [design]="'B'"
+            [label]="'Generation'"
+            formControlName="generation"  
+          ></app-input-field>
+          <div class="errors-container">
+            <ng-container *ngIf="generation.errors && (generation.dirty || generation.touched)">
+              <span *ngIf="generation.errors?.required">The field is required</span>
+            </ng-container>
+          </div>
+        </div>
+        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+          <app-input-field
+            [placeholder]="'Weight....'"
+            [design]="'B'"
+            [label]="'Weight'"
+            formControlName="weight"
+          ></app-input-field>
+          <div class="errors-container">
+            <ng-container *ngIf="weight.errors && (weight.dirty || weight.touched)">
+              <span *ngIf="weight.errors?.required">The field is required</span>
+            </ng-container>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="pokemon-types">
-      <h5>Pokemon Types</h5>
-      <div *ngFor="let type of pokemonTypes" fxLayout="column">
-        <mat-checkbox>{{ type?.name | titlecase }}</mat-checkbox>
+      <div fxLayout="row" fxFlex="100">
+        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+          <app-input-field
+            [placeholder]="'Pokedex Number....'"
+            [design]="'B'"
+            [label]="'Pokedex'"
+            formControlName="pokedexNumber"
+          >
+          </app-input-field>
+          <div class="errors-container">
+            <ng-container *ngIf="pokedexNumber.errors && (pokedexNumber.dirty || pokedexNumber.touched)">
+              <span *ngIf="pokedexNumber.errors?.required">The field is required</span>
+            </ng-container>
+          </div>
+        </div>
+        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+          <app-input-field
+            [placeholder]="'Height....'"
+            [design]="'B'"
+            [label]="'Height'"
+            formControlName="height"
+          >
+          </app-input-field>
+          <div class="errors-container">
+            <ng-container *ngIf="height.errors && (height.dirty || height.touched)">
+              <span *ngIf="height.errors?.required">The field is required</span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-is-legendary" fxLayout="row" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutGap="25px">
+            <span>Is Legendary ?</span>
+            <mat-checkbox formControlName="isLegendary"></mat-checkbox>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="is-legendary">
-      <mat-checkbox>Is Legendary?</mat-checkbox>
-    </div> -->
-  </form>
+      <div fxLayout="row" fxFlex="100">
+        <div fxFlex="33" fxLayoutAlign="start start">
+          <mat-form-field appearance="fill" fxFlex="340px">
+            <mat-label>Pokemon Abilities</mat-label>
+            <mat-select multiple formControlName="abilities">
+              <mat-option *ngFor="let ability of pokemonAbilities" [value]="ability">
+                {{ ability.name | titlecase  }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33" fxLayoutAlign="start start">
+          <mat-form-field appearance="fill" fxFlex="340px">
+            <mat-label>Pokemon Types</mat-label>
+            <mat-select multiple formControlName="types">
+              <mat-option *ngFor="let type of pokemonTypes" [value]="type">
+                {{ type.name | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33" fxLayoutAlign="start start">
+          <mat-form-field appearance="fill" fxFlex="340px">
+            <mat-label>Pokemon Categories</mat-label>
+            <mat-select multiple formControlName="categories">
+              <mat-option *ngFor="let category of pokemonCategories" [value]="category">
+                {{ category.name | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </ng-scrollbar>
 </div>

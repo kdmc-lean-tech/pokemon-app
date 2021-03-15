@@ -1,16 +1,19 @@
 @import '../../../../sass/variables.scss';
 
 .user-chat-container {
+  margin-top: 15px;
   height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
   cursor: pointer;
   .user-chat-img {
     height: auto;
-    width: 90px;
-    border-radius: 50%;
+    width: 150px;
     display: flex;
     align-items: center;
     img {
       width: 100%;
+      border-radius: 50%;
     }
   }
   .user-chat-detail {
@@ -32,5 +35,5 @@
 }
 
 .active {
-  background-color: $primary-0;
+  border: 2px dashed $primary-0;
 }

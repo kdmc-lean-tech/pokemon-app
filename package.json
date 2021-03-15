@@ -28,7 +28,6 @@
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
     "@types/socket.io-client": "^1.4.35",
-    "ngx-audio-player": "^11.0.4",
     "ngx-loading": "^8.0.0",
     "ngx-scrollbar": "^7.5.4",
     "ngx-socket-io": "^3.2.0",

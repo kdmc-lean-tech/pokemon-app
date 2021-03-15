@@ -8,10 +8,18 @@ import { CreatePokemonComponent } from './create-pokemon/create-pokemon.componen
 import { SharedModule } from '../../shared/shared.module';
 import { PokemonFormComponent } from './create-pokemon/pokemon-form/pokemon-form.component';
 import { StatisticsFormComponent } from './create-pokemon/statistics-form/statistics-form.component';
+import { UploadPokemonImageComponent } from './create-pokemon/upload-pokemon-image/upload-pokemon-image.component';
 
 
 @NgModule({
-  declarations: [PokemonComponent, PokemonListComponent, CreatePokemonComponent, PokemonFormComponent, StatisticsFormComponent],
+  declarations: [
+    PokemonComponent,
+    PokemonListComponent,
+    CreatePokemonComponent,
+    PokemonFormComponent,
+    StatisticsFormComponent,
+    UploadPokemonImageComponent
+  ],
   imports: [
     CommonModule,
     PokemonRoutingModule,

@@ -1,8 +1,22 @@
-<div class="input-container">
-  <input type="text"
+<span [ngSwitch]="design">
+  <div *ngSwitchCase="'A'" class="input-container-a">
+    <input
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [type]="type"
+    (input)="setValue($event.target.value)">
+  </div>
+  <div *ngSwitchDefault class="input-container-b">
+    <div class="input">
+      <input
+      class="input__field"
       [value]="value"
       [placeholder]="placeholder"
       [disabled]="disabled"
       [type]="type"
-      (input)="setValue($event.target.value)">
-</div>
+      (input)="setValue($event.target.value)"/>
+			<button type="button" class="btn btn--primary btn--inside uppercase">{{ label }}</button>
+    </div>
+  </div>
+</span>

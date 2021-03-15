@@ -22,9 +22,7 @@ import {
 import { removeTheSameModel } from '../shared/utils/filters.utils';
 import { setUsers } from '../store/actions/chat.actions';
 import { ChatService } from '../services/chat.service';
-import { Message } from '../models/message.model';
 import { ToastrService } from 'ngx-toastr';
-import { MessageService } from '../services/message.service';
 
 
 @Component({
@@ -46,7 +44,6 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
     private sessionService: SessionService,
     private chatService: ChatService,
     private toastr: ToastrService,
-    private messageService: MessageService
   ) {
     this.chatNameSpace = setNameSpaceConfig('chat', this.sessionService.getToken());
   }
@@ -75,14 +72,19 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.store.dispatch(setSocketStatus({ online: false }));
       })
     );
-    this.chatNameSpace.emit(JOIN_ROOM_EVENT, {
-      room: USERS_ROOM,
-      search: ''
-    });
     this.subscriptions.add(
       this.chatNameSpace.fromEvent(CONNECT_EVENT).subscribe(() => {
         this.chatService.chatNameSpaceProvider.next(this.chatNameSpace);
       })
+    );
+    this.subscriptions.add(
+      this.chatNameSpace.fromEvent('update-users')
+        .subscribe(() => {
+          this.chatNameSpace.emit(JOIN_ROOM_EVENT, {
+            room: USERS_ROOM,
+            search: ''
+          });
+        })
     );
     this.subscriptions.add(
       this.chatNameSpace.fromEvent(GET_USERS_EVENT)
@@ -98,7 +100,7 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.chatNameSpace.fromEvent(PRIVATE_MESSAGE_EVENT)
         .subscribe((newMessage: any) => { // TODO: Pending type this........
           if (newMessage.to._id === this.sessionService.getUser()._id) {
-            this.toastr.info(`${ newMessage.message }`, `${ newMessage.of.name } has just written to you:`);
+            this.toastr.warning(`has just written to you.....`, `${ newMessage.of.name }`);
             // TODO: Pending insert newMessage to corresponding user.....
           }
         })

@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserChat } from '../../../models/user.model';
 import { ChatService } from '../../../services/chat.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
-import { SessionService } from '../../../services/session.service';
 import { MessageService } from '../../../services/message.service';
+import { Message } from '../../../models/message.model';
 
 @Component({
   selector: 'app-sidebar-chat',
@@ -20,7 +20,6 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private store: Store<AppState>,
-    private sessionService: SessionService,
     private messageService: MessageService
   ) { }
 
@@ -41,10 +40,24 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
   public getMessages(to: string) {
     this.messageService.getMessages(to)
     .subscribe(messages => {
+      if (messages.filter(m => m.seen === false).length > 0) {
+        this.seenMessages(messages, to);
+      }
       this.messageService.messages.next({ userSelected: to, messages });
     }, err => {
       this.messageService.messages.next({ userSelected: to, messages: [] });
     });
+  }
+
+  private seenMessages(messages: Message[], to) {
+    const messageIds = messages.map(
+      m => {
+        if (m.of._id === to) {
+          return m._id;
+        }
+      }
+    );
+    this.chatService.seeMessage(messageIds);
   }
 
   ngOnDestroy() {

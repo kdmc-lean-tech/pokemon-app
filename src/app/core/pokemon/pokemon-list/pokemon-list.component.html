@@ -16,7 +16,7 @@
     <ng-container matColumnDef="photo">
       <th mat-header-cell *matHeaderCellDef>Photo</th>
       <td mat-cell *matCellDef="let pokemon" class="pokemon-img">
-        <img src="https://www.revistacambio.com.mx/wp-content/uploads/2020/03/76479dd91dc55c2768ddccfc30a4fbf5.png" alt="sunil" />
+        <img  *ngIf="pokemon?.avatar" [src]="pokemon.avatar.url" />
       </td>
     </ng-container>
 

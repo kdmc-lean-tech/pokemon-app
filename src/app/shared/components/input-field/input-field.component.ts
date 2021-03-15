@@ -15,7 +15,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class InputFieldComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder = '';
-  @Input() type: string = 'text';
+  @Input() type = 'text';
+  @Input() design: 'A' | 'B' = 'A';
+  @Input() label = '';
   public value = '';
   public disabled = false;
   onChange = (_: any) => {};

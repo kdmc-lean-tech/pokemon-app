@@ -9,4 +9,11 @@
   app-button {
     width: 150px;
   }
+  app-upload-pokemon-image {
+    margin-bottom: 25px;
+  }
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
 }

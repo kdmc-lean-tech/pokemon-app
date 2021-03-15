@@ -1,0 +1,26 @@
+
+:host {
+  form {
+    padding: 50px;
+  }
+}
+
+.pokemon-form-container {
+  height: 450px;
+  overflow: auto;
+  .pokemon-form-features {
+    height: 400px;
+    margin: 25px;
+    .pokemon-form-input {
+      padding: 50px 50px 0 50px;
+    }
+  }
+}
+
+.errors-container {
+  color: red;
+  height: 15px;
+  > span:not(:first-child) {
+    display: none;
+  }
+}

@@ -70,11 +70,11 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
   }
 
-  public verifyMessage(newMessage: Message, userSelected: string) {
+  public verifyMessage(newMessage: any, userSelected: string) { // TODO: Pending type this.......
     if (
-      newMessage.of === userSelected
+      newMessage.of._id === userSelected
       ||
-      newMessage.to === userSelected
+      newMessage.to._id === userSelected
       ) {
         this.messages.push(newMessage);
         this.scrollable.scrollToElement(this.endOfMessages);

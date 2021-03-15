@@ -36,7 +36,7 @@ export const loadingConfiguration = {
 export const editorConfig: AngularEditorConfig = {
   editable: true,
     spellcheck: true,
-    height: '80px',
+    height: 'auto',
     minHeight: '0',
     maxHeight: 'auto',
     width: 'auto',

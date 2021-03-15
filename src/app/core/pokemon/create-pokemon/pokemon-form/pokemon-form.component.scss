@@ -2,15 +2,55 @@
 @import '../../../../../sass/variables.scss';
 
 :host {
-  h5 {
-    @include text(400, 18px, $primary-0);
+  h2 {
+    @include text(400, 25px, $primary-0);
+    margin-top: 15px;
+  }
+  form {
+    padding: 50px 50px 0 50px;
+    .form-is-legendary {
+      width: 340px;
+			background: $white-0;
+			font: inherit;
+			box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+			border: 0;
+			outline: 0;
+      height: 64px;
+      padding: 5px;
+      span {
+        color: $primary-0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
   }
 }
 
 .pokemon-form-container {
   height: 400px;
   overflow: auto;
-  background: url('https://i.pinimg.com/originals/38/34/d3/3834d3b2b48bccb9a5cff334286cd5fd.png') fixed no-repeat;
-  background-position: right center;
-  background-size: 350px;
+  .pokemon-form-features {
+    height: 400px;
+    margin: 25px;
+    .pokemon-form-input {
+      padding: 50px;
+    }
+  }
+}
+
+.errors-container {
+  color: red;
+  height: 15px;
+  > span:not(:first-child) {
+    display: none;
+  }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: $primary-0 !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: $primary-0;
 }

@@ -23,6 +23,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DebounceInputDirective } from './directives/debounce-input.directive';
 import { NotifierComponent } from './components/notifier/notifier.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { NotifierComponent } from './components/notifier/notifier.component';
     InputSearchComponent,
     SocketIndicatorComponent,
     DebounceInputDirective,
-    NotifierComponent
+    NotifierComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,
@@ -68,6 +71,8 @@ import { NotifierComponent } from './components/notifier/notifier.component';
     MatStepperModule,
     MatCheckboxModule,
     NgScrollbarModule,
+    MatBadgeModule,
+    FileUploadComponent
   ]
 })
 export class SharedModule { }

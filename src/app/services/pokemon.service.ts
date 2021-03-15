@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiGateway } from '../shared/constants/api-gateway.constants';
 import { PokemonFilter } from '../store/models/pokemons.model';
-import { PokemonResponse, PokemonAbility, PokemonTypes } from '../models/pokemon.model';
+import {
+  PokemonResponse,
+  PokemonAbility,
+  PokemonTypes,
+  PokemonCategory
+} from '../models/pokemon.model';
 import { BodyResponse } from '../models/response.model';
 import { pluck } from 'rxjs/operators';
 
@@ -40,6 +45,14 @@ export class PokemonService {
   public getPokemonTypes(): Observable<BodyResponse<PokemonTypes>> {
     const url = `${ ApiGateway.POKEMON_TYPES }`;
     return this.http.get<BodyResponse<PokemonTypes>>(url)
+      .pipe(
+        pluck('body')
+      );
+  }
+
+  public getPokemonCategories(): Observable<BodyResponse<PokemonCategory>> {
+    const url = `${ ApiGateway.POKEMON_CATEGORIES }`;
+    return this.http.get<BodyResponse<PokemonCategory>>(url)
       .pipe(
         pluck('body')
       );
