@@ -6,4 +6,5 @@ export interface PokemonStatistic {
   hp: number;
   spAttack: number;
   spDefense: number;
+  speed: number;
 }

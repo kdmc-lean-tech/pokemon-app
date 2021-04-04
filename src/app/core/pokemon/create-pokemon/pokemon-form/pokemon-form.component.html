@@ -83,7 +83,7 @@
           <mat-form-field appearance="fill" fxFlex="340px">
             <mat-label>Pokemon Abilities</mat-label>
             <mat-select multiple formControlName="abilities">
-              <mat-option *ngFor="let ability of pokemonAbilities" [value]="ability">
+              <mat-option *ngFor="let ability of pokemonAbilities" [value]="ability._id">
                 {{ ability.name | titlecase  }}
               </mat-option>
             </mat-select>
@@ -93,7 +93,7 @@
           <mat-form-field appearance="fill" fxFlex="340px">
             <mat-label>Pokemon Types</mat-label>
             <mat-select multiple formControlName="types">
-              <mat-option *ngFor="let type of pokemonTypes" [value]="type">
+              <mat-option *ngFor="let type of pokemonTypes" [value]="type._id">
                 {{ type.name | titlecase }}
               </mat-option>
             </mat-select>
@@ -103,7 +103,7 @@
           <mat-form-field appearance="fill" fxFlex="340px">
             <mat-label>Pokemon Categories</mat-label>
             <mat-select multiple formControlName="categories">
-              <mat-option *ngFor="let category of pokemonCategories" [value]="category">
+              <mat-option *ngFor="let category of pokemonCategories" [value]="category._id">
                 {{ category.name | titlecase }}
               </mat-option>
             </mat-select>

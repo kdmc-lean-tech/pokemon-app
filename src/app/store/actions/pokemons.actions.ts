@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Pokemon } from '../../models/pokemon.model';
+import { Pokemon, PokemonDetail } from '../../models/pokemon.model';
 import { SortPokemonColumn, SortType } from '../../models/filter.model';
 
 export const loadPokemons = createAction(
@@ -29,4 +29,14 @@ export const toggleSortFilter = createAction(
 export const toogleSortFilterBySelects = createAction(
   '[Pokemon] Toogle Sort Filter',
   props<{ columnName: SortPokemonColumn, sortType: SortType }>()
+);
+
+export const setPokemon = createAction(
+  '[Pokemon] Set Pokemon',
+  props<{ pokemon: PokemonDetail }>()
+);
+
+export const loadPokemon = createAction(
+  '[Pokemon] Load Pokemon',
+  props<{ pokemonId: string }>()
 );

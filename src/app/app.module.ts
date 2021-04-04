@@ -13,12 +13,22 @@ import { EffectsModule } from '@ngrx/effects';
 import { httpInterceptorProviders } from './interceptors/index';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ToastrModule } from 'ngx-toastr';
+import { RolesComponent } from './admin/roles/roles.component';
+import { CategoriesComponent } from './admin/categories/categories.component';
+import { TypesComponent } from './admin/types/types.component';
+import { AbilitiesComponent } from './admin/abilities/abilities.component';
+import { UsersComponent } from './admin/users/users.component';
 
 const config: SocketIoConfig = { url: environment.API_DOMAIN_SOCKETS, options: {} };
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RolesComponent,
+    CategoriesComponent,
+    TypesComponent,
+    AbilitiesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

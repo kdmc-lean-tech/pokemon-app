@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
 export class PokemonListComponent implements OnInit, OnDestroy {
   public pokemons: Pokemon[];
   private subscriptions = new Subscription();
-  public columns: string[] = ['photo', 'pokedex', 'name', 'generation', 'created', 'date'];
+  public columns: string[] = ['photo', 'pokedex', 'name', 'generation', 'created', 'date', 'actions'];
   public dataSource: MatTableDataSource<Pokemon>;
   public page: number;
   public itemPerPage: number;
@@ -107,6 +107,10 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   public goToCreatePokemon() {
     this.router.navigate(['pokemon/add-pokemon']);
+  }
+
+  public goToEditPokemon(pokemonId: string) {
+    this.router.navigate(['pokemon/add-pokemon', pokemonId]);
   }
 
   ngOnDestroy() {

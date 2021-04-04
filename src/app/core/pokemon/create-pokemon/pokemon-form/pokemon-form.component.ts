@@ -1,28 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PokemonService } from '../../../../services/pokemon.service';
-import { PokemonAbility, PokemonCategory, PokemonTypes } from '../../../../models/pokemon.model';
+import {
+  PokemonAbility,
+  PokemonCategory,
+  PokemonDetail,
+  PokemonTypes
+} from '../../../../models/pokemon.model';
 import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../store/models/app.model';
 
 @Component({
   selector: 'app-pokemon-form',
   templateUrl: './pokemon-form.component.html',
   styleUrls: ['./pokemon-form.component.scss']
 })
-export class PokemonFormComponent implements OnInit {
+export class PokemonFormComponent implements OnInit, OnDestroy {
   public pokemonAbilities: PokemonAbility[];
   public pokemonTypes: PokemonTypes[];
   public pokemonCategories: PokemonCategory[];
   public form: FormGroup;
+  private subscriptions = new Subscription();
 
   constructor(
     private pokemonService: PokemonService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.getPokemon();
+  }
+
+  private getPokemon() {
     this.getPokemonAbilitiesAndTypes();
+    this.subscriptions.add(
+      this.store.select('pokemon').subscribe(({ pokemon }) => {
+        pokemon && this.populateForm(pokemon);
+      })
+    );
   }
 
   private getPokemonAbilitiesAndTypes() {
@@ -50,6 +68,20 @@ export class PokemonFormComponent implements OnInit {
       types: new FormControl(null, [Validators.required]),
       abilities: new FormControl(null, [Validators.required]),
       categories: new FormControl(null, [Validators.required])
+    });
+  }
+
+  private populateForm(pokemon: PokemonDetail) {
+    this.form.patchValue({
+      name: pokemon.name,
+      isLegendary: pokemon.isLegendary,
+      generation: pokemon.generation,
+      weight: pokemon.weight,
+      pokedexNumber: pokemon.pokedexNumber,
+      height: pokemon.height,
+      types: pokemon.types.map(({ _id }) => _id),
+      abilities: pokemon.abilities.map(({ _id }) => _id),
+      categories: pokemon.categories.map(({ _id }) => _id)
     });
   }
 
@@ -87,5 +119,9 @@ export class PokemonFormComponent implements OnInit {
 
   get height() {
     return this.form.get('height') as FormControl;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

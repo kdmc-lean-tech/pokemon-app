@@ -1,0 +1,22 @@
+@import '../../../../../sass/mixins.scss';
+@import '../../../../../sass/variables.scss';
+
+:host {
+  app-button {
+    width: 200px;
+  }
+}
+
+.select-evolution-container {
+  h3 {
+    @include text(700, 30px, $primary-0);
+    text-align: center;
+    margin-top: 5px;
+  }
+  .select-evolution {
+    app-input-search {
+      width: 400px;
+    }
+  }
+  margin-bottom: 25px;
+}

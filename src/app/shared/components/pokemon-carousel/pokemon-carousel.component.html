@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center" class="select-evolution">
+  <app-input-search
+    [placeholder]="'Search a Pokemon'"
+    (valueChanged)="searchPokemons($event)"
+    [value]="pokemonControl.value?.name"
+  ></app-input-search>
+  <form [formGroup]="form" class="select-evolution-item">
+    <div *ngIf="pokemons.length > 0" fxLayout="row" fxLayoutAlign="center center">
+      <carousel
+        [cellsToShow]="1"
+        [width]="450"
+        [cellWidth]="450"
+        [objectFit]="'contain'"
+      >
+      <ng-container *ngFor="let pokemon of pokemons">
+        <div class="carousel-cell">
+          <div class="select-evolution-pokemon-card" fxLayout="row" fxLayoutAlign="center center">
+            <span>{{ pokemon.name }}</span>
+            <input type="radio" [value]="pokemon" formControlName="pokemonControl"/>
+          </div>
+          <img [src]="pokemon.avatar.url" [alt]="pokemon.name"/>
+        </div>
+      </ng-container>
+      </carousel>
+    </div>
+  </form>
+</div>

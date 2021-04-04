@@ -1,4 +1,4 @@
-import { Pokemon } from '../../models/pokemon.model';
+import { Pokemon, PokemonDetail } from '../../models/pokemon.model';
 import { SortPokemonColumn, SortType } from '../../models/filter.model';
 
 export interface PokemonSort {
@@ -17,4 +17,9 @@ export interface PokemonState {
   pokemons: Pokemon[];
   filters: PokemonFilter;
   len: number;
+}
+
+export interface PokemonDetailState {
+  pokemon: PokemonDetail;
+  pokemonId: string;
 }

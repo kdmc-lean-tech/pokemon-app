@@ -1,4 +1,8 @@
 <div class="inbox-chat-container">
+  <app-input-search
+      [placeholder]="'Search a user'"
+      (valueChanged)="searchUsers($event)"
+  ></app-input-search>
   <ng-scrollbar #scrollable>
     <div *ngFor="let user of users" class="inbox-chat-contacts">
       <div class="inbox-chat-contact">

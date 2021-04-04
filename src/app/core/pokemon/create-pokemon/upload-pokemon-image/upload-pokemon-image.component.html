@@ -2,8 +2,9 @@
   <form [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutGap="15px"
     fxLayoutAlign="space-between start">
     <div fxFlex="45" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
-      <img *ngIf="!previuosFile" src="https://res.cloudinary.com/drc3hn2yj/image/upload/v1606439333/unnamed_qfq5h7.jpg" alt="sunil" />
-      <img *ngIf="previuosFile" [src]="previuosFile" alt="upload-image">
+      <img *ngIf="!previuosFile && !pokemon?.avatar" src="https://res.cloudinary.com/drc3hn2yj/image/upload/v1606439333/unnamed_qfq5h7.jpg" alt="pokemon-image" />
+      <img *ngIf="previuosFile" [src]="previuosFile" alt="pokemon-image">
+      <img *ngIf="!previuosFile && pokemon?.avatar" [src]="pokemon.avatar.url"  alt="pokemon-image"/>
       <app-file-upload formControlName="file"></app-file-upload>
     </div>
     <div fxLayout="column" fxLayoutGap="5px" fxFlex="45">

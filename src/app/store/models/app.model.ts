@@ -1,7 +1,7 @@
 import { SocketState } from '../models/socket.model';
 import { AuthState } from '../models/auth.model';
 import { UI } from '../models/ui.model';
-import { PokemonState } from './pokemons.model';
+import { PokemonState, PokemonDetailState } from './pokemons.model';
 import { ChatState } from './chat.model';
 
 export interface AppState {
@@ -10,4 +10,5 @@ export interface AppState {
   auth: AuthState;
   socket: SocketState;
   chat: ChatState;
+  pokemon: PokemonDetailState;
 }

@@ -1,0 +1,32 @@
+<form [formGroup]="form" class="select-evolution-container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="center center">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="100">
+    <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+      <h3>Previuos Evolution</h3>
+      <app-pokemon-carousel
+          formControlName="prevEvolution"
+          [pokemonExclude]="pokemon"
+          #pokemonCarouselPrev
+        >
+      </app-pokemon-carousel>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <app-button [label]="'Return changes'" (submitted)="returnChanges('prev')"></app-button>
+        <app-button [label]="'Clear'" (submitted)="clearSearch('prev')"></app-button>
+      </div>
+    </div>
+    <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+      <h3>Next Evolution</h3>
+      <app-pokemon-carousel
+        formControlName="nextEvolution"
+        [pokemonExclude]="pokemon"
+        #pokemonCarouselNext
+      >
+      </app-pokemon-carousel>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <app-button [label]="'Return changes'" (submitted)="returnChanges('next')"></app-button>
+        <app-button [label]="'Clear'" (submitted)="clearSearch('next')"></app-button>
+      </div>
+    </div>
+  </div>
+</form>

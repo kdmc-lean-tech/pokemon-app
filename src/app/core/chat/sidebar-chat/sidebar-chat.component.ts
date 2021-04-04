@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { MessageService } from '../../../services/message.service';
 import { Message } from '../../../models/message.model';
+import { JOIN_ROOM_EVENT, USERS_ROOM } from '../../../shared/constants/socket-events.constants';
 
 @Component({
   selector: 'app-sidebar-chat',
@@ -58,6 +59,13 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
       }
     );
     this.chatService.seeMessage(messageIds);
+  }
+
+  public searchUsers($event) {
+    this.chatService.chatNameSpaceProvider.value.emit(JOIN_ROOM_EVENT, {
+      room: USERS_ROOM,
+      search: $event ? $event : ''
+    });
   }
 
   ngOnDestroy() {

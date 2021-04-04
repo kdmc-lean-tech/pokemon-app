@@ -1,12 +1,6 @@
 @import '../../../sass/mixins.scss';
 @import '../../../sass/variables.scss';
 
-:host {
-  app-input-search {
-    width: 410px;
-  }
-}
-
 .chat-container {
   h1 {
     @include text(700, 30px, $primary-0);

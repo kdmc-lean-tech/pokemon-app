@@ -9,6 +9,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { PokemonFormComponent } from './create-pokemon/pokemon-form/pokemon-form.component';
 import { StatisticsFormComponent } from './create-pokemon/statistics-form/statistics-form.component';
 import { UploadPokemonImageComponent } from './create-pokemon/upload-pokemon-image/upload-pokemon-image.component';
+import { ApprovePokemonComponent } from './approve-pokemon/approve-pokemon.component';
+import { SelectEvolutionPokemonFormComponent } from './create-pokemon/select-evolution-pokemon-form/select-evolution-pokemon-form.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { UploadPokemonImageComponent } from './create-pokemon/upload-pokemon-ima
     CreatePokemonComponent,
     PokemonFormComponent,
     StatisticsFormComponent,
-    UploadPokemonImageComponent
+    UploadPokemonImageComponent,
+    ApprovePokemonComponent,
+    SelectEvolutionPokemonFormComponent
   ],
   imports: [
     CommonModule,

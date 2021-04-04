@@ -5,6 +5,9 @@ import { requiredFileType } from '../../../../shared/validators/form-validators.
 import { editorConfig } from '../../../../shared/constants/global.constants';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../store/models/app.model';
+import { PokemonDetail } from '../../../../models/pokemon.model';
 
 @Component({
   selector: 'app-upload-pokemon-image',
@@ -16,8 +19,12 @@ export class UploadPokemonImageComponent implements OnInit {
   public form: FormGroup;
   public previuosFile: FileReader;
   public subscriptions = new Subscription();
+  public pokemon: PokemonDetail;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>
+  ) {
     const angularEditorConfig = editorConfig;
     angularEditorConfig.height = '300px';
     this.editorConfig = angularEditorConfig;
@@ -25,7 +32,17 @@ export class UploadPokemonImageComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.getPokemon();
     this.listenFileUpload();
+  }
+
+  private getPokemon() {
+    this.subscriptions.add(
+      this.store.select('pokemon').subscribe(({ pokemon }) => {
+        pokemon && this.populateForm(pokemon);
+        this.pokemon = pokemon;
+      })
+    );
   }
 
   public createForm() {
@@ -33,6 +50,13 @@ export class UploadPokemonImageComponent implements OnInit {
       description: new FormControl(null, [Validators.required]),
       file: [null, [Validators.required, requiredFileType('png', 'jpg', 'jpeg')]],
       fileReader: [null]
+    });
+    this.file.disable();
+  }
+
+  private populateForm(pokemon: PokemonDetail) {
+    this.form.patchValue({
+      description: pokemon.description
     });
   }
 

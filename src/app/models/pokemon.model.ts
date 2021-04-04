@@ -3,6 +3,7 @@ import { PokemonStatistic } from './pokemon-statistics.model';
 import { CreatedBy } from './user.model';
 import { Paginator } from '../shared/models/paginator.model';
 import { Avatar } from '../models/avatar.model';
+import { Status } from '../models/status.model';
 
 export interface Pokemon extends Base {
   name: string;
@@ -16,11 +17,21 @@ export interface PokemonDetail extends Pokemon {
   isLegendary: boolean;
   generation: number;
   weight: number;
-  speed: number;
-  japaneseName: string;
   height: number;
   pokemonStatistics: PokemonStatistic;
   createdBy: CreatedBy;
+  categories: PokemonCategory[];
+  closingDate: Date;
+  description: string;
+  abilities: PokemonAbility[];
+  types: PokemonTypes[];
+  status: Status;
+  prevEvolution:  PokemonDetail;
+  nextEvolution: PokemonDetail;
+}
+
+export interface PokemonDetailResponse {
+  body: PokemonDetail;
 }
 
 export interface PokemonResponse {
@@ -62,5 +73,7 @@ export interface PokemonRequestBody {
     spAttack: number;
     spDefense: number;
     speed: number;
-  }
+  },
+  prevEvolution: PokemonDetail;
+  nextEvolution: PokemonDetail;
 }

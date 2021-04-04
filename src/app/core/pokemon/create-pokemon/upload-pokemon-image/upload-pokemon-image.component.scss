@@ -6,3 +6,11 @@
     border-radius: 10px;
   }
 }
+
+.errors-container {
+  color: red;
+  height: 15px;
+  > span:not(:first-child) {
+    display: none;
+  }
+}

@@ -35,5 +35,9 @@
 }
 
 .active {
-  border: 2px dashed $primary-0;
+  .user-chat-detail {
+    background-color: $gray-2;
+    margin: 15px;
+    border-radius: 10px;
+  }
 }

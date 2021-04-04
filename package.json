@@ -28,6 +28,8 @@
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
     "@types/socket.io-client": "^1.4.35",
+    "angular-responsive-carousel": "^2.0.2",
+    "compressorjs": "^1.0.7",
     "ngx-loading": "^8.0.0",
     "ngx-scrollbar": "^7.5.4",
     "ngx-socket-io": "^3.2.0",

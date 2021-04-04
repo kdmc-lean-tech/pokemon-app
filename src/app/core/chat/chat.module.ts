@@ -8,8 +8,6 @@ import { SidebarChatComponent } from './sidebar-chat/sidebar-chat.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SendMessageComponent } from './send-message/send-message.component';
-import { IncomingMessageComponent } from './incoming-message/incoming-message.component';
-import { OutgoingMessageComponent } from './outgoing-message/outgoing-message.component';
 import { SharedModule } from '../../shared/shared.module';
 
 
@@ -20,9 +18,7 @@ import { SharedModule } from '../../shared/shared.module';
     SidebarChatComponent,
     UserChatComponent,
     MessagesComponent,
-    SendMessageComponent,
-    IncomingMessageComponent,
-    OutgoingMessageComponent
+    SendMessageComponent
   ],
   imports: [
     CommonModule,

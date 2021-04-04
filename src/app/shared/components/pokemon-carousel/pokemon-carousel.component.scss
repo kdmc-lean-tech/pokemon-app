@@ -1,0 +1,17 @@
+@import '../../../../sass//mixins.scss';
+@import '../../../../sass/variables.scss';
+
+.select-evolution {
+  app-input-search {
+    width: 400px;
+  }
+  .select-evolution-item {
+    height: 250px;
+    .select-evolution-pokemon-card {
+      span, input {
+        @include text(400, 25px, $primary-0);
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

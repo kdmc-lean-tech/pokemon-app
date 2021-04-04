@@ -1,11 +1,7 @@
 <div class="chat-container" fxLayout="column">
   <h1>Pokemon Chat</h1>
-  <app-input-search
-      [placeholder]="'Search a user'"
-      (valueChanged)="searchUsers($event)"
-  ></app-input-search>
-  <div fxFlex="100" fxLayoutGap="25px">
-    <div class="inbox-people" fxFlex="30">
+  <div fxFlex="100" fxLayoutGap="15px">
+    <div class="inbox-people" fxFlex="35">
       <app-inbox-people></app-inbox-people>
     </div>
     <div class="messages" fxFlex="65">

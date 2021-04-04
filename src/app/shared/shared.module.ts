@@ -25,6 +25,10 @@ import { DebounceInputDirective } from './directives/debounce-input.directive';
 import { NotifierComponent } from './components/notifier/notifier.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { BubbleChatComponent } from './components/bubble-chat/bubble-chat.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { MatRadioModule } from '@angular/material/radio';
+import { PokemonCarouselComponent } from './components/pokemon-carousel/pokemon-carousel.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     SocketIndicatorComponent,
     DebounceInputDirective,
     NotifierComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    BubbleChatComponent,
+    PokemonCarouselComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +51,9 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     ReactiveFormsModule,
     FormsModule,
     FlexModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    IvyCarouselModule,
+    MatRadioModule
   ],
   exports: [
     MatButtonModule,
@@ -72,7 +80,11 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     MatCheckboxModule,
     NgScrollbarModule,
     MatBadgeModule,
-    FileUploadComponent
+    FileUploadComponent,
+    BubbleChatComponent,
+    IvyCarouselModule,
+    MatRadioModule,
+    PokemonCarouselComponent
   ]
 })
 export class SharedModule { }

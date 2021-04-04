@@ -1,18 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { PokemonDetail } from '../../../../models/pokemon.model';
+import { AppState } from '../../../../store/models/app.model';
 
 @Component({
   selector: 'app-statistics-form',
   templateUrl: './statistics-form.component.html',
   styleUrls: ['./statistics-form.component.scss']
 })
-export class StatisticsFormComponent implements OnInit {
+export class StatisticsFormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
+  private subscriptions = new Subscription();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.getPokemon();
+  }
+
+  private getPokemon() {
+    this.subscriptions.add(
+      this.store.select('pokemon').subscribe(({ pokemon }) => {
+        pokemon && this.populateForm(pokemon);
+      })
+    );
   }
 
   private createForm() {
@@ -23,6 +40,18 @@ export class StatisticsFormComponent implements OnInit {
       hp: new FormControl(null, [Validators.required]),
       spAttack: new FormControl(null, [Validators.required]),
       spDefense: new FormControl(null, [Validators.required])
+    });
+  }
+
+  private populateForm(pokemon: PokemonDetail) {
+    const { pokemonStatistics } = pokemon;
+    this.form.patchValue({
+      speed: pokemonStatistics.speed,
+      attack: pokemonStatistics.attack,
+      defense: pokemonStatistics.defense,
+      hp: pokemonStatistics.hp,
+      spAttack: pokemonStatistics.spAttack,
+      spDefense: pokemonStatistics.spDefense
     });
   }
 
@@ -48,5 +77,9 @@ export class StatisticsFormComponent implements OnInit {
 
   get spDefense() {
     return this.form.get('spDefense') as FormControl;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

@@ -30,6 +30,22 @@
       </div>
     </mat-step>
     <mat-step>
+      <ng-template matStepLabel>Select Pokemon Evolution</ng-template>
+      <div fxLayout="column" fxLayoutGap="50px">
+        <app-select-evolution-pokemon-form #selectEvolutionForm></app-select-evolution-pokemon-form>
+      </div>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <app-button
+          [label]="'Back'"
+          (submitted)="stepper.previous()"
+        ></app-button>
+        <app-button
+          [label]="'Next'"
+          (submitted)="stepper.next()"
+        ></app-button>
+      </div>
+    </mat-step>
+    <mat-step>
       <ng-template matStepLabel>Save your pokemon</ng-template>
       <div fxLayout="column" fxLayoutGap="50px">
         <app-upload-pokemon-image #uploadPokemonForm></app-upload-pokemon-image>
