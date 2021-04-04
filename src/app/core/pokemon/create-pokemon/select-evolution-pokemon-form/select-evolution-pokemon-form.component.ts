@@ -29,9 +29,6 @@ export class SelectEvolutionPokemonFormComponent implements OnInit, OnDestroy, A
 
   ngOnInit(): void {
     this.createForm();
-    // this.form.valueChanges.subscribe(val => {
-    //   console.log(val);
-    // });
   }
 
   ngAfterViewInit(): void {

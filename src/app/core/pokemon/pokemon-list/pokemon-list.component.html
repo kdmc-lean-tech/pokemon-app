@@ -1,14 +1,16 @@
 
-<span [ngSwitch]="(size$ | async)">
-  <div *ngSwitchCase="'xs'" fxLayout="column" fxLayoutGap="25px">
-    <ng-container [ngTemplateOutlet]="search"></ng-container>
-    <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
-  </div>
-  <div *ngSwitchDefault fxLayout="column" fxLayoutGap="25px">
-    <ng-container [ngTemplateOutlet]="search"></ng-container>
-    <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
-  </div>
-</span>
+<ng-scrollbar #scrollable class="pokemon-list-container" [visibility]="'hover'">
+  <span [ngSwitch]="(size$ | async)">
+    <div *ngSwitchCase="'xs'" fxLayout="column" fxLayoutGap="25px">
+      <ng-container [ngTemplateOutlet]="search"></ng-container>
+      <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
+    </div>
+    <div *ngSwitchDefault fxLayout="column" fxLayoutGap="25px">
+      <ng-container [ngTemplateOutlet]="search"></ng-container>
+      <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
+    </div>
+  </span>
+</ng-scrollbar>
 
 <ng-template #tableBig>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
