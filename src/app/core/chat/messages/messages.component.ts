@@ -70,7 +70,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
   }
 
-  public verifyMessage(newMessage: any, userSelected: string) { // TODO: Pending type this.......
+  public verifyMessage(newMessage: any, userSelected: string) {
     if (
       newMessage.of._id === userSelected
       ||

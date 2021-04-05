@@ -29,6 +29,8 @@ import { BubbleChatComponent } from './components/bubble-chat/bubble-chat.compon
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatRadioModule } from '@angular/material/radio';
 import { PokemonCarouselComponent } from './components/pokemon-carousel/pokemon-carousel.component';
+import { PermissionDirective } from './directives/permission.directive';
+import { TimeDisplayComponent } from './components/time-display/time-display.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { PokemonCarouselComponent } from './components/pokemon-carousel/pokemon-
     NotifierComponent,
     FileUploadComponent,
     BubbleChatComponent,
-    PokemonCarouselComponent
+    PokemonCarouselComponent,
+    PermissionDirective,
+    TimeDisplayComponent
   ],
   imports: [
     CommonModule,
@@ -84,7 +88,9 @@ import { PokemonCarouselComponent } from './components/pokemon-carousel/pokemon-
     BubbleChatComponent,
     IvyCarouselModule,
     MatRadioModule,
-    PokemonCarouselComponent
+    PokemonCarouselComponent,
+    PermissionDirective,
+    TimeDisplayComponent
   ]
 })
 export class SharedModule { }

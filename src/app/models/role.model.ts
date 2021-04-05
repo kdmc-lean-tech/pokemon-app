@@ -3,6 +3,7 @@ import { Base } from './base.model';
 export interface Role extends Base {
   name: string;
   modules: Modules[];
+  permissions: Permissions[];
 }
 
 export interface Modules extends Base{
@@ -10,4 +11,9 @@ export interface Modules extends Base{
   label: string;
   icon: string;
   path: string;
+}
+
+export interface Permissions extends Base {
+  name: string;
+  codename: string;
 }

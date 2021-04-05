@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Pokemon } from '../../../models/pokemon.model';
+import { Pokemon, PokemonWithRemainingTime } from '../../../models/pokemon.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
 import { Subscription, Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { SortPokemonColumn } from '../../../models/filter.model';
 import { BreakpointObserverService } from '../../../services/breakpoint-observer.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TimerService } from '../../../services/timer.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -23,9 +24,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit, OnDestroy {
-  public pokemons: Pokemon[];
+  public pokemons: PokemonWithRemainingTime[];
   private subscriptions = new Subscription();
-  public columns: string[] = ['photo', 'pokedex', 'name', 'generation', 'created', 'date', 'actions'];
+  public columns: string[] =
+    ['photo', 'pokedex', 'name', 'generation', 'created', 'date', 'time', 'actions'];
   public dataSource: MatTableDataSource<Pokemon>;
   public page: number;
   public itemPerPage: number;
@@ -42,12 +44,14 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   ];
   public sortByType: string[] = ['Ascending', 'Descending'];
   public sortForm: FormGroup;
+  private timerSubscription: Subscription;
 
   constructor(
     private store: Store<AppState>,
     private breakpointObserverService: BreakpointObserverService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private timerService: TimerService
   ) {
     this.size$ = this.breakpointObserverService.size$;
   }
@@ -75,6 +79,13 @@ export class PokemonListComponent implements OnInit, OnDestroy {
         this.itemPerPage = pokemons.filters.itemPerPage;
         this.len = pokemons.len;
         this.filters = pokemons.filters;
+        if (this.timerSubscription) {
+          this.timerSubscription.unsubscribe();
+        }
+        this.timerSubscription = this.timerService.coutdown(this.pokemons)
+          .subscribe(pok => {
+            this.dataSource.data = pok;
+          });
       }),
     );
     this.store.dispatch(loadPokemons());
@@ -114,6 +125,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
     this.subscriptions.unsubscribe();
   }
 }

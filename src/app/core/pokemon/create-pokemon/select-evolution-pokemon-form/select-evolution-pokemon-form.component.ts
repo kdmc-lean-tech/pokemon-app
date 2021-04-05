@@ -7,7 +7,6 @@ import { PokemonDetail } from '../../../../models/pokemon.model';
 import { first, skip, tap } from 'rxjs/operators';
 import { PokemonCarouselComponent } from 'src/app/shared/components/pokemon-carousel/pokemon-carousel.component';
 import { PokemonDetailState } from 'src/app/store/models/pokemons.model';
-import { PokemonCarouselService } from 'src/app/services/pokemon-carousel.service';
 
 @Component({
   selector: 'app-select-evolution-pokemon-form',
@@ -23,8 +22,7 @@ export class SelectEvolutionPokemonFormComponent implements OnInit, OnDestroy, A
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<AppState>,
-    public pokemonCarouselService: PokemonCarouselService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {

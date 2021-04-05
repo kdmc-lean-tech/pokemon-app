@@ -1,16 +1,13 @@
-
-<ng-scrollbar #scrollable class="pokemon-list-container" [visibility]="'hover'">
-  <span [ngSwitch]="(size$ | async)">
-    <div *ngSwitchCase="'xs'" fxLayout="column" fxLayoutGap="25px">
-      <ng-container [ngTemplateOutlet]="search"></ng-container>
-      <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
-    </div>
-    <div *ngSwitchDefault fxLayout="column" fxLayoutGap="25px">
-      <ng-container [ngTemplateOutlet]="search"></ng-container>
-      <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
-    </div>
-  </span>
-</ng-scrollbar>
+<span [ngSwitch]="(size$ | async)">
+  <div *ngSwitchCase="'xs'" fxLayout="column" fxLayoutGap="25px">
+    <ng-container [ngTemplateOutlet]="search"></ng-container>
+    <ng-container [ngTemplateOutlet]="tableSmall"></ng-container>
+  </div>
+  <div *ngSwitchDefault fxLayout="column" fxLayoutGap="25px">
+    <ng-container [ngTemplateOutlet]="search"></ng-container>
+    <ng-container [ngTemplateOutlet]="tableBig"></ng-container>
+  </div>
+</span>
 
 <ng-template #tableBig>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -87,9 +84,40 @@
       <th mat-header-cell *matHeaderCellDef>
       </th>
       <td mat-cell *matCellDef="let pokemon">
-        <app-button fxFlex="100px" [label]="'Edit'" (submitted)="goToEditPokemon(pokemon._id)"></app-button>
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+          <span
+            class="material-icons"
+            (click)="goToEditPokemon(pokemon._id)"
+            appPermission
+            permission='edit-pokemon'
+            fxFlex="100px"
+            >
+              mode_edit
+          </span>
+          <span
+            class="material-icons"
+            fxFlex="100px"
+            >
+              remove_red_eye
+          </span>
+          <span
+            class="material-icons"
+            appPermission
+            permission='approve-pokemon'
+            >
+              fact_check
+          </span>
+        </div>
       </td>
     </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let pokemon">
+        <app-time-display [time]="pokemon.remainingTime"></app-time-display>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns;"></tr>
   </table>

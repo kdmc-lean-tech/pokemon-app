@@ -11,6 +11,12 @@ export interface Pokemon extends Base {
   generation: number;
   createdBy: CreatedBy;
   avatar?: Avatar;
+  status: Status;
+  closingDate: Date;
+}
+
+export interface PokemonWithRemainingTime extends Pokemon {
+  remainingTime?: string;
 }
 
 export interface PokemonDetail extends Pokemon {
