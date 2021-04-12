@@ -4,9 +4,9 @@ import { SessionService } from './session.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SessionResponse } from '../models/session-response.model';
-import { tap } from 'rxjs/operators';
+import { pluck, tap } from 'rxjs/operators';
 import { ApiGateway } from 'src/app/shared/constants/api-gateway.constants';
-import { UserRequestBody } from '../models/user.model';
+import { User, UserProfileBody, UserRequestBody } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +67,13 @@ export class AuthService {
       token
     });
     return this.http.get<any>(url, { headers });
+  }
+
+  public editProfile(userId: string, user: UserProfileBody): Observable<any> {
+    const url = `${ApiGateway.AUTH}/${userId}/profile`;
+    return this.http.put<any>(url, user)
+    .pipe(
+      pluck('body')
+    );
   }
 }

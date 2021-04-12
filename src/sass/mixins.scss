@@ -98,3 +98,13 @@
   right: -16px;
   top: 0px;
 }
+
+@mixin errorField {
+  .errors-container {
+    color: red;
+    height: 15px;
+    > span:not(:first-child) {
+      display: none;
+    }
+  }
+}

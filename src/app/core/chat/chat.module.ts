@@ -9,6 +9,7 @@ import { UserChatComponent } from './user-chat/user-chat.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SendMessageComponent } from './send-message/send-message.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     ChatRoutingModule,
-    SharedModule
+    SharedModule,
+    ScrollingModule
   ]
 })
 export class ChatModule { }

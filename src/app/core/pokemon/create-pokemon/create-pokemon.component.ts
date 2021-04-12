@@ -15,7 +15,7 @@ import {
 } from './select-evolution-pokemon-form/select-evolution-pokemon-form.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/models/app.model';
-import { loadPokemon, setPokemon } from '../../../store/actions/pokemons.actions';
+import { loadPokemon } from '../../../store/actions/pokemons.actions';
 
 @Component({
   selector: 'app-create-pokemon',

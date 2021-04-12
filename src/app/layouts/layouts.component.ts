@@ -17,12 +17,15 @@ import {
   USERS_ROOM,
   CONNECT_EVENT,
   GET_USERS_EVENT,
-  PRIVATE_MESSAGE_EVENT
+  PRIVATE_MESSAGE_EVENT,
+  UPDATE_USERS,
+  MESSAGE_VIEWED
 } from '../shared/constants/socket-events.constants';
 import { removeTheSameModel } from '../shared/utils/filters.utils';
-import { setUsers } from '../store/actions/chat.actions';
+import { resetUsers, setSocketUser, setUsers } from '../store/actions/chat.actions';
 import { ChatService } from '../services/chat.service';
 import { ToastrService } from 'ngx-toastr';
+import { Message } from '../models/message.model';
 
 
 @Component({
@@ -64,6 +67,7 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
     );
     this.subscriptions.add(
       this.socketService.connect.subscribe(() => {
+        this.chatNameSpace.emit('');
         this.store.dispatch(setSocketStatus({ online: true }));
       })
     );
@@ -78,31 +82,37 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
     this.subscriptions.add(
-      this.chatNameSpace.fromEvent('update-users')
+      this.chatNameSpace.fromEvent(UPDATE_USERS)
         .subscribe(() => {
+          this.store.dispatch(resetUsers());
           this.chatNameSpace.emit(JOIN_ROOM_EVENT, {
             room: USERS_ROOM,
-            search: ''
+            search: '',
+            page: 1
           });
-        })
+        }),
     );
     this.subscriptions.add(
       this.chatNameSpace.fromEvent(GET_USERS_EVENT)
         .pipe(
-          map((users: UserChat[]) =>
-          removeTheSameModel(users, this.sessionService.getUser()._id))
+          map((users: UserChat[]) => removeTheSameModel(users, this.sessionService.getUser()._id))
         )
         .subscribe((users: UserChat[]) => {
-          this.store.dispatch(setUsers({ users }));
+          this.store.dispatch(setUsers({ users, page: 1 }));
         })
     );
     this.subscriptions.add(
       this.chatNameSpace.fromEvent(PRIVATE_MESSAGE_EVENT)
-        .subscribe((newMessage: any) => { // TODO: Pending type this........
-          if (newMessage.to._id === this.sessionService.getUser()._id) {
-            this.toastr.warning(`has just written to you.....`, `${ newMessage.of.name }`);
-            // TODO: Pending insert newMessage to corresponding user.....
+        .subscribe(({ message }: { message: Message }) => {
+          if (message.to._id === this.sessionService.getUser()._id) {
+            this.toastr.success(`has just written to you.....`, `${ message.of.name }`);
           }
+        })
+    );
+    this.subscriptions.add(
+      this.chatNameSpace.fromEvent(MESSAGE_VIEWED)
+        .subscribe((user: UserChat) => {
+          this.store.dispatch(setSocketUser({ user }));
         })
     );
   }

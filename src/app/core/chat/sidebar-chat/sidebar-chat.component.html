@@ -3,14 +3,29 @@
       [placeholder]="'Search a user'"
       (valueChanged)="searchUsers($event)"
   ></app-input-search>
-  <ng-scrollbar #scrollable>
-    <div *ngFor="let user of users" class="inbox-chat-contacts">
-      <div class="inbox-chat-contact">
-        <app-user-chat
-          [active]="user._id === userSelected"
-          [user]="user"
-          (userSelected)="setUserChat($event)"
-        ></app-user-chat>
+  <ng-scrollbar #scrollable
+    appearance="compact"
+    [autoHeightDisabled]="true"
+    [autoWidthDisabled]="true"
+    [sensorDisabled]="true">
+    <div
+      scrollViewport
+      infiniteScroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollUpDistance]="2"
+      [infiniteScrollThrottle]="50"
+      [scrollWindow]="false"
+      (scrolled)="onScrollDown($event)"
+      (scrolledUp)="onUp($event)"
+    >
+      <div *ngFor="let user of users" class="inbox-chat-contacts">
+        <div class="inbox-chat-contact">
+          <app-user-chat
+            [active]="user._id === userSelected"
+            [user]="user"
+            (userSelected)="setUserChat($event)"
+          ></app-user-chat>
+        </div>
       </div>
     </div>  
   </ng-scrollbar>

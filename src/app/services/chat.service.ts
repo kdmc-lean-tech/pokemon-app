@@ -31,7 +31,7 @@ export class ChatService {
     this.chatNameSpaceProvider.value.emit(event, { newMessage: chatMessage, room: SET_CHAT_ROOM });
   }
 
-  public seeMessage(messageIds: string[]) {
-    this.chatNameSpaceProvider.value.emit('see-message', { messageIds, room: 'seen' });
+  public seeMessage(messageIds: string[], to) {
+    this.chatNameSpaceProvider.value.emit('see-message', { messageIds, room: 'seen', to });
   }
 }

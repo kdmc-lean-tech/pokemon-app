@@ -1,0 +1,47 @@
+<form
+  [formGroup]="form"
+  class="profile-dialog-container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="25px"
+  >
+  <div class="profile-dialog-title">
+    <h1>Edit Profile</h1>
+  </div>
+  <div class="profile-dialog-image" fxLayout="row" fxLayoutAlign="center center">
+    <img *ngIf="!previuosFile && data.avatar" [src]="data.avatar.url" alt="profile-image"/>
+    <img *ngIf="!previuosFile && !data.avatar" src="https://i.pinimg.com/564x/ff/21/46/ff21464e9b32158399b1e9e3d0e61414.jpg" alt="profile-image" />
+    <img *ngIf="previuosFile" [src]="previuosFile" alt="profile-image" />
+  </div>
+  <div class="profile-dialog-file">
+    <app-file-upload formControlName="file"></app-file-upload>
+  </div>
+  <div class="profile-dialog-input">
+    <app-input-field
+      [placeholder]="'Name....'"
+      [design]="'B'"
+      [label]="'Name'"
+      formControlName="name"
+    ></app-input-field>
+        <div class="errors-container">
+          <ng-container *ngIf="name.errors && (name.dirty || name.touched)">
+            <span *ngIf="name.errors?.required">The field is required</span>
+          </ng-container>
+        </div>
+    </div>
+    <div class="profile-dialog-buttons">
+      <div fxLayout="row" fxLayoutGap="25px">
+        <app-button
+          [label]="'Close'"
+          fxFlex="250px"
+          (submitted)="closeDialog()"
+        ></app-button>
+        <app-button
+          [label]="'Edit'"
+          fxFlex="250px"
+          (submitted)="onSubmit()"
+          [disabled]="form.invalid"
+        ></app-button>
+      </div>
+    </div>
+</form>

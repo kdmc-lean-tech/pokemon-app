@@ -31,6 +31,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { PokemonCarouselComponent } from './components/pokemon-carousel/pokemon-carousel.component';
 import { PermissionDirective } from './directives/permission.directive';
 import { TimeDisplayComponent } from './components/time-display/time-display.component';
+import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,8 @@ import { TimeDisplayComponent } from './components/time-display/time-display.com
     BubbleChatComponent,
     PokemonCarouselComponent,
     PermissionDirective,
-    TimeDisplayComponent
+    TimeDisplayComponent,
+    ProfileDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +62,8 @@ import { TimeDisplayComponent } from './components/time-display/time-display.com
     FlexModule,
     FlexLayoutModule,
     IvyCarouselModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -90,7 +96,9 @@ import { TimeDisplayComponent } from './components/time-display/time-display.com
     MatRadioModule,
     PokemonCarouselComponent,
     PermissionDirective,
-    TimeDisplayComponent
+    TimeDisplayComponent,
+    MatDialogModule,
+    InfiniteScrollModule
   ]
 })
 export class SharedModule { }

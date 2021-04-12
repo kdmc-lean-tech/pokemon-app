@@ -7,6 +7,8 @@ export const JOIN_ROOM_EVENT = 'join-room';
 export const CONNECT_EVENT = 'connect';
 export const DISCONNECT_EVENT = 'disconnect';
 export const NEW_MESSAGE_EVENT = 'new-message';
+export const UPDATE_USERS = 'update-users';
+export const MESSAGE_VIEWED = 'message-viewed';
 
 export const USERS_ROOM = 'users-room';
 export const SET_CHAT_ROOM = 'set-chat';

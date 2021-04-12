@@ -11,7 +11,8 @@ export interface User extends Base {
   avatar?: Avatar;
 }
 
-export interface UserChat extends Base {
+export interface UserChat {
+  _id: string;
   name: string;
   online: boolean;
   totalMessages: number;
@@ -32,4 +33,8 @@ export interface UserRequestBody {
 export interface JoinChat {
   of: string;
   to: string;
+}
+
+export interface UserProfileBody {
+  name: string;
 }

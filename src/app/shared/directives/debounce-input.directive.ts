@@ -11,7 +11,7 @@ export class DebounceInputDirective implements OnDestroy {
   public appDebouncedInput: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
-  public debounceDelay = 300;
+  public debounceDelay = 250;
 
   private stream: Subject<any> = new Subject<any>();
   private subscription: Subscription;

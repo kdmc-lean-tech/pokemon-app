@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild
@@ -17,6 +17,10 @@ import {
   PRIVATE_MESSAGE_EVENT
 } from '../../../shared/constants/socket-events.constants';
 import { switchMap } from 'rxjs/operators';
+import { UserChat } from 'src/app/models/user.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/models/app.model';
+import { setSocketUser } from 'src/app/store/actions/chat.actions';
 
 @Component({
   selector: 'app-messages',
@@ -28,14 +32,14 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
   public activeChat = false;
   public messages: Message[] = [];
   public userSelected: string;
-  @ViewChild('scrollable') scrollable: NgScrollbar;
-  @ViewChild('endOfMessages') endOfMessages: ElementRef;
-  public durationInSeconds = 5;
+  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
 
   constructor(
     public sessionService: SessionService,
     private chatService: ChatService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private store: Store<AppState>,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -45,7 +49,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
         if (userSelected) {
           this.userSelected = userSelected;
           this.messages = messages;
-          this.scrollable.scrollToElement(this.endOfMessages);
+          this.scrollbarRef.scrollTo({bottom: 0, duration: 800});
         }
       })
     );
@@ -59,9 +63,16 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
               return of(undefined);
             }
           })
-        ).subscribe((newMessage: Message) => {
-          if (newMessage && this.userSelected) {
-            this.verifyMessage(newMessage, this.userSelected);
+        ).subscribe((data: { message: Message, user: UserChat }) => {
+          if (data) {
+            const { user, message } = data;
+            if (message && this.userSelected) {
+            this.verifyMessage(message, this.userSelected);
+            }
+            if (user?._id !== this.sessionService.getUser()._id) {
+              this.store.dispatch(setSocketUser({ user }));
+              this.cdr.detectChanges();
+            }
           }
       })
     );
@@ -70,14 +81,14 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
   }
 
-  public verifyMessage(newMessage: any, userSelected: string) {
+  public verifyMessage(message: Message, userSelected: string) {
     if (
-      newMessage.of._id === userSelected
+      message.of._id === userSelected
       ||
-      newMessage.to._id === userSelected
+      message.to._id === userSelected
       ) {
-        this.messages.push(newMessage);
-        this.scrollable.scrollToElement(this.endOfMessages);
+        this.messages.push(message);
+        this.scrollbarRef.scrollTo({bottom: 0, duration: 800});
         this.chatService.chatNameSpaceProvider.value.emit(GET_USERS_EVENT);
     }
   }

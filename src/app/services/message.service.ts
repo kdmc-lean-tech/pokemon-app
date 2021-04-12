@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
@@ -18,9 +18,12 @@ export class MessageService {
     private http: HttpClient
   ) {}
 
-  public getMessages(to: string): Observable<Message[]> {
+  public getMessages(to: string, page = 1): Observable<Message[]> {
     const url = `${ApiGateway.MESSAGES}`;
-    return this.http.get<Message[]>(`${url}/${to}`).pipe(
+    const params = new HttpParams()
+      .set('page', `${ page }`)
+      .set('itemPerPage', '10')
+    return this.http.get<Message[]>(`${url}/${to}`, { params }).pipe(
       pluck('body'),
     );
   }
