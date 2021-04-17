@@ -14,7 +14,7 @@ import {
 })
 export class ButtonComponent {
   @Input() label: string;
-  @Input() color: 'light-blue' | 'blue' = 'blue';
+  @Input() color: 'light-blue' | 'blue' | 'pink' | 'yellow' = 'blue';
   @Input() size: 'small' | 'medium' | 'large' | 'extra-large' = 'medium';
   @Input() type: 'button' | 'submit' | 'menu' | 'reset' = 'button';
   @Input() disabled = false;

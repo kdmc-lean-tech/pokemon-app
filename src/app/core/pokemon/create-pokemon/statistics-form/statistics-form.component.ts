@@ -1,9 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { maxNumber, minNumber } from 'src/app/shared/validators/form-validators.utils';
 import { PokemonDetail } from '../../../../models/pokemon.model';
 import { AppState } from '../../../../store/models/app.model';
+import {
+  ApexAxisChartSeries,
+  ChartComponent
+} from 'ng-apexcharts';
+import { ChartOptions } from 'src/app/models/apex-chart-model';
+
 
 @Component({
   selector: 'app-statistics-form',
@@ -13,15 +20,19 @@ import { AppState } from '../../../../store/models/app.model';
 export class StatisticsFormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   private subscriptions = new Subscription();
+  @ViewChild('chart') chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
 
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.getPokemon();
+    this.setDataFormInChart([{ data: [0, 0, 0, 0, 0, 0] }]);
+    this.listenChangesInChart();
   }
 
   private getPokemon() {
@@ -34,12 +45,12 @@ export class StatisticsFormComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.form = this.fb.group({
-      speed: new FormControl(null, [Validators.required]),
-      attack: new FormControl(null, [Validators.required]),
-      defense: new FormControl(null, [Validators.required]),
-      hp: new FormControl(null, [Validators.required]),
-      spAttack: new FormControl(null, [Validators.required]),
-      spDefense: new FormControl(null, [Validators.required])
+      speed: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)]),
+      attack: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)]),
+      defense: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)]),
+      hp: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)]),
+      spAttack: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)]),
+      spDefense: new FormControl(0, [Validators.required, maxNumber(10), minNumber(0)])
     });
   }
 
@@ -53,6 +64,79 @@ export class StatisticsFormComponent implements OnInit, OnDestroy {
       spAttack: pokemonStatistics.spAttack,
       spDefense: pokemonStatistics.spDefense
     });
+  }
+
+  private setDataFormInChart(data: ApexAxisChartSeries) {
+    this.chartOptions = {
+      series: data,
+      chart: {
+        height: 350,
+        type: 'bar',
+        events: {
+          click: function(chart, w, e) {
+            // console.log(chart, w, e)
+          }
+        }
+      },
+      colors: [
+        '#008FFB',
+        '#00E396',
+        '#FEB019',
+        '#FF4560',
+        '#775DD0',
+        '#546E7A'
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: '45%',
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        show: false
+      },
+      xaxis: {
+        categories: [
+          'Speed',
+          'Attack',
+          'Life Points',
+          'Special Attack',
+          'Defense',
+          'Special Defense',
+        ],
+        labels: {
+          style: {
+            colors: [
+              '#008FFB',
+              '#00E396',
+              '#FEB019',
+              '#FF4560',
+              '#775DD0',
+              '#546E7A',
+              '#26a69a',
+              '#D10CE8'
+            ],
+            fontSize: '12px'
+          }
+        }
+      }
+    };
+  }
+
+  private listenChangesInChart() {
+    this.subscriptions.add(
+      this.form.valueChanges.subscribe((
+        { speed, attack, defense, hp, spAttack, spDefense }) => {
+          const data = [speed, attack, defense, hp, spAttack, spDefense];
+          this.setDataFormInChart([{ data }]);
+      })
+    );
   }
 
   get speed() {

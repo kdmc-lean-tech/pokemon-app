@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { UserChat } from '../../models/user.model';
 
 export const setUsers = createAction(
-  '[Chat] Set Users', props<{ users: UserChat[], page: 1 }>()
+  '[Chat] Set Users', props<{ users: UserChat[] }>()
 );
 
 export const resetUsers = createAction(

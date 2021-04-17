@@ -8,7 +8,8 @@ import {
   setPaginatorFilter,
   toggleSortFilter,
   toogleSortFilterBySelects,
-  setSearchFilter
+  setSearchFilter,
+  setPokemons
 } from '../../../store/actions/pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonFilter } from '../../../store/models/pokemons.model';
@@ -127,5 +128,6 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.timerSubscription.unsubscribe();
     this.subscriptions.unsubscribe();
+    this.store.dispatch(setPokemons({ pokemons: [], len: 0 }));
   }
 }

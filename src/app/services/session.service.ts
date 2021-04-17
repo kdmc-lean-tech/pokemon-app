@@ -61,7 +61,7 @@ export class SessionService {
   public clearStore() {
     this.store.dispatch(setUser({ token: null, user: null }));
     this.store.dispatch(setPokemons({ pokemons: [], len: 0 }));
-    this.store.dispatch(setUsers({ users: [], page: 1 }));
+    this.store.dispatch(setUsers({ users: [] }));
   }
 
   public clearData() {

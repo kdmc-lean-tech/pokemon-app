@@ -93,6 +93,14 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  public onScrollDown($event) {
+    console.log('Down', $event);
+  }
+
+  public onUp($event) {
+    console.log('Up', $event);
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

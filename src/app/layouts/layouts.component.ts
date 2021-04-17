@@ -19,7 +19,8 @@ import {
   GET_USERS_EVENT,
   PRIVATE_MESSAGE_EVENT,
   UPDATE_USERS,
-  MESSAGE_VIEWED
+  MESSAGE_VIEWED,
+  NEW_USER_CONNECTED_EVENT
 } from '../shared/constants/socket-events.constants';
 import { removeTheSameModel } from '../shared/utils/filters.utils';
 import { resetUsers, setSocketUser, setUsers } from '../store/actions/chat.actions';
@@ -84,7 +85,6 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.add(
       this.chatNameSpace.fromEvent(UPDATE_USERS)
         .subscribe(() => {
-          this.store.dispatch(resetUsers());
           this.chatNameSpace.emit(JOIN_ROOM_EVENT, {
             room: USERS_ROOM,
             search: '',
@@ -98,7 +98,7 @@ export class LayoutsComponent implements OnInit, AfterViewInit, OnDestroy {
           map((users: UserChat[]) => removeTheSameModel(users, this.sessionService.getUser()._id))
         )
         .subscribe((users: UserChat[]) => {
-          this.store.dispatch(setUsers({ users, page: 1 }));
+          this.store.dispatch(setUsers({ users }));
         })
     );
     this.subscriptions.add(

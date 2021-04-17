@@ -14,3 +14,15 @@ export const requiredFileType = (...typeFiles: string[]) => {
     return exist ? null : { message: `The file extension is not valid.` };
   };
 };
+
+export const maxNumber = (max: number) => {
+  return (control: FormControl) => {
+    return control.value <= max ? null :  { message: `Only values less than or equal to ${ max } are allowed.` };
+  }
+}
+
+export const minNumber = (min: number) => {
+  return (control: FormControl) => {
+    return control.value > min ? null : { message: `Only values greater than ${ min } are allowed` }
+  };
+}

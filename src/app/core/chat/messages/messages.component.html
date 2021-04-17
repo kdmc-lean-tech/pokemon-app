@@ -1,18 +1,34 @@
 <div class="message-container">
   <div class="message-history" fxLayout="column">
-    <ng-scrollbar #scrollable>
-      <div *ngFor="let message of messages" class="message-box">
-        <app-bubble-chat
-          *ngIf="message.of._id !== sessionService.getUser()?._id"
-          [message]="message"
-          [mode]="'incoming'"
-        ></app-bubble-chat>
-        <app-bubble-chat
-        *ngIf="message.of._id === sessionService.getUser()?._id"
-          [message]="message"
-          [mode]="'outgoing'"
-        >
-        </app-bubble-chat>
+    <ng-scrollbar #scrollable
+      appearance="compact"
+      [autoHeightDisabled]="true"
+      [autoWidthDisabled]="true"
+      [sensorDisabled]="true"
+      >
+      <div
+        scrollViewport
+        infiniteScroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollUpDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [scrollWindow]="false"
+        (scrolled)="onScrollDown($event)"
+        (scrolledUp)="onUp($event)"
+      >
+        <div *ngFor="let message of messages" class="message-box">
+          <app-bubble-chat
+            *ngIf="message.of._id !== sessionService.getUser()?._id"
+            [message]="message"
+            [mode]="'incoming'"
+          ></app-bubble-chat>
+          <app-bubble-chat
+          *ngIf="message.of._id === sessionService.getUser()?._id"
+            [message]="message"
+            [mode]="'outgoing'"
+          >
+          </app-bubble-chat>
+        </div>
       </div>
     </ng-scrollbar>
     <div *ngIf="!activeChat">

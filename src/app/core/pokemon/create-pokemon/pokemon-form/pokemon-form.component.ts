@@ -10,6 +10,7 @@ import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms
 import { combineLatest, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/models/app.model';
+import { maxNumber } from 'src/app/shared/validators/form-validators.utils';
 
 @Component({
   selector: 'app-pokemon-form',
@@ -61,7 +62,7 @@ export class PokemonFormComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       name: new FormControl(null, [Validators.required]),
       isLegendary: new FormControl(false, [Validators.required]),
-      generation: new FormControl(null, [Validators.required]),
+      generation: new FormControl(null, [Validators.required, maxNumber(7)]),
       weight: new FormControl(null, [Validators.required]),
       pokedexNumber: new FormControl(null, [Validators.required]),
       height: new FormControl(null, [Validators.required]),

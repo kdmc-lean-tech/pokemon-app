@@ -13,6 +13,14 @@
     background-color: $primary-1;
     border: 1px solid $primary-1;
   }
+  &.pink {
+    background-color: #E16DF1;
+    border: 1px solid #E16DF1;
+  }
+  &.yellow {
+    background-color: $yellow-0;
+    border: $yellow-0;
+  }
   &.small {
     height: 40px;
   }

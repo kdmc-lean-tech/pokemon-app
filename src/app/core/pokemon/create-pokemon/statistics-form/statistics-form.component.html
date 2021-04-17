@@ -1,88 +1,105 @@
 <div class="pokemon-form-container">
   <ng-scrollbar #scrollable>
-    <form [formGroup]="form" fxLayout="column" fxLayoutGap="25px" class="pokemon-form-features">
-      <div fxLayout="row" fxFlex="100">
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Speed....'"
-            [design]="'B'"
-            [label]="'Speed'"
-            formControlName="speed"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="speed.errors && (speed.dirty || speed.touched)">
-              <span *ngIf="speed.errors?.required">The field is required</span>
-            </ng-container>
+    <div fxLayout="row" fxFlex="100">
+      <form [formGroup]="form" fxLayout="column" fxLayoutGap="25px" class="pokemon-form-features" fxFlex="45">
+        <div fxLayout="row" fxFlex="100">
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Speed....'"
+              [label]="'Speed'"
+              formControlName="speed"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="speed.errors && (speed.dirty || speed.touched)">
+                <span *ngIf="speed.errors?.required">The field is required</span>
+                <span *ngIf="speed.errors?.message">{{ speed.errors?.message }}</span>
+              </ng-container>
+            </div>
+          </div>
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Attack....'"
+              [label]="'Attack'"
+              formControlName="attack"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="attack.errors && (attack.dirty || attack.touched)">
+                <span *ngIf="attack.errors?.required">The field is required</span>
+                <span *ngIf="attack.errors?.message">{{ attack.errors?.message }}</span>
+              </ng-container>
+            </div>
           </div>
         </div>
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Attack....'"
-            [design]="'B'"
-            [label]="'Attack'"
-            formControlName="attack"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="attack.errors && (attack.dirty || attack.touched)">
-              <span *ngIf="attack.errors?.required">The field is required</span>
-            </ng-container>
+        <div fxLayout="row" fxFlex="100">
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Life Points....'"
+              [label]="'HP'"
+              formControlName="hp"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="hp.errors && (hp.dirty || hp.touched)">
+                <span *ngIf="hp.errors?.required">The field is required</span>
+                <span *ngIf="hp.errors?.message">{{ hp.errors?.message }}</span>
+              </ng-container>
+            </div>
+          </div>
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Special Attack....'"
+              [label]="'Sp. Attack'"
+              formControlName="spAttack"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="spAttack.errors && (spAttack.dirty || spAttack.touched)">
+                <span *ngIf="spAttack.errors?.required">The field is required</span>
+                <span *ngIf="spAttack.errors?.message">{{ spAttack.errors?.message }}</span>
+              </ng-container>
+            </div>
           </div>
         </div>
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Defense....'"
-            [design]="'B'"
-            [label]="'Defense'"
-            formControlName="defense"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="defense.errors && (defense.dirty || defense.touched)">
-              <span *ngIf="defense.errors?.required">The field is required</span>
-            </ng-container>
+        <div fxLayout="row" fxFlex="100">
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Defense....'"
+              [label]="'Defense'"
+              formControlName="defense"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="defense.errors && (defense.dirty || defense.touched)">
+                <span *ngIf="defense.errors?.required">The field is required</span>
+                <span *ngIf="defense.errors?.message">{{ defense.errors?.message }}</span>
+              </ng-container>
+            </div>
+          </div>
+          <div fxFlex="50" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
+            <app-input-field
+              [placeholder]="'Special Defense....'"
+              [label]="'Sp. Def...'"
+              formControlName="spDefense"
+            ></app-input-field>
+            <div class="errors-container">
+              <ng-container *ngIf="spDefense.errors && (spDefense.dirty || spDefense.touched)">
+                <span *ngIf="spDefense.errors?.required">The field is required</span>
+                <span *ngIf="spDefense.errors?.message">{{ spDefense.errors?.message }}</span>
+              </ng-container>
+            </div>
           </div>
         </div>
+      </form>
+      <div id="chart" fxFlex="50">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [yaxis]="chartOptions.yaxis"
+          [xaxis]="chartOptions.xaxis"
+          [legend]="chartOptions.legend"
+          [colors]="chartOptions.colors"
+          [grid]="chartOptions.grid"
+        ></apx-chart>
       </div>
-      <div fxLayout="row" fxFlex="100">
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Life Points....'"
-            [design]="'B'"
-            [label]="'HP'"
-            formControlName="hp"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="hp.errors && (hp.dirty || hp.touched)">
-              <span *ngIf="hp.errors?.required">The field is required</span>
-            </ng-container>
-          </div>
-        </div>
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Special Attack....'"
-            [design]="'B'"
-            [label]="'Sp. Attack'"
-            formControlName="spAttack"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="spAttack.errors && (spAttack.dirty || spAttack.touched)">
-              <span *ngIf="spAttack.errors?.required">The field is required</span>
-            </ng-container>
-          </div>
-        </div>
-        <div fxFlex="33" fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="5px">
-          <app-input-field
-            [placeholder]="'Special Defense....'"
-            [design]="'B'"
-            [label]="'Sp. Def...'"
-            formControlName="spDefense"
-          ></app-input-field>
-          <div class="errors-container">
-            <ng-container *ngIf="spDefense.errors && (spDefense.dirty || spDefense.touched)">
-              <span *ngIf="spDefense.errors?.required">The field is required</span>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </form>
+    </div>
   </ng-scrollbar>
 </div>

@@ -20,11 +20,13 @@
             [placeholder]="'Generation....'"
             [design]="'B'"
             [label]="'Generation'"
-            formControlName="generation"  
+            formControlName="generation"
+            [type]="'number'"
           ></app-input-field>
           <div class="errors-container">
             <ng-container *ngIf="generation.errors && (generation.dirty || generation.touched)">
               <span *ngIf="generation.errors?.required">The field is required</span>
+              <span *ngIf="generation.errors?.message">{{ generation.errors?.message }}</span>
             </ng-container>
           </div>
         </div>
@@ -34,6 +36,7 @@
             [design]="'B'"
             [label]="'Weight'"
             formControlName="weight"
+            [type]="'number'"
           ></app-input-field>
           <div class="errors-container">
             <ng-container *ngIf="weight.errors && (weight.dirty || weight.touched)">
@@ -49,6 +52,7 @@
             [design]="'B'"
             [label]="'Pokedex'"
             formControlName="pokedexNumber"
+            [type]="'number'"
           >
           </app-input-field>
           <div class="errors-container">
@@ -63,6 +67,7 @@
             [design]="'B'"
             [label]="'Height'"
             formControlName="height"
+            [type]="'number'"
           >
           </app-input-field>
           <div class="errors-container">

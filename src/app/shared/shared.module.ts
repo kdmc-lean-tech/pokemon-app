@@ -34,6 +34,9 @@ import { TimeDisplayComponent } from './components/time-display/time-display.com
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ColumnChartComponent } from './components/column-chart/column-chart.component';
 
 
 @NgModule({
@@ -52,6 +55,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PermissionDirective,
     TimeDisplayComponent,
     ProfileDialogComponent,
+    ColumnChartComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +67,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FlexLayoutModule,
     IvyCarouselModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    NgApexchartsModule
   ],
   exports: [
     MatButtonModule,
@@ -98,7 +103,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PermissionDirective,
     TimeDisplayComponent,
     MatDialogModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgApexchartsModule,
+    MatProgressSpinnerModule,
+    ColumnChartComponent
   ]
 })
 export class SharedModule { }

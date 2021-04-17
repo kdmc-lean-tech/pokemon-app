@@ -20,7 +20,6 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   public users: UserChat[];
   public userSelected: string;
-  private page = 1;
 
   constructor(
     private chatService: ChatService,
@@ -31,10 +30,9 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchUsers('');
     this.subscriptions.add(
-      this.store.select('chat').subscribe(({ users, page }) => {
+      this.store.select('chat').subscribe(({ users }) => {
         if (users) {
           this.users = users;
-          this.page = page;
         }
       })
     );
@@ -46,8 +44,8 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
     this.getMessages(to);
   }
 
-  public getMessages(to: string, page = 1) {
-    this.messageService.getMessages(to, page)
+  public getMessages(to: string) {
+    this.messageService.getMessages(to, 1)
     .subscribe(messages => {
       if (messages.filter(m => m.seen === false).length > 0) {
         this.seenMessages(messages, to);
@@ -69,34 +67,11 @@ export class SidebarChatComponent implements OnInit, OnDestroy {
     this.chatService.seeMessage(messageIds, to);
   }
 
-  public searchUsers($event: string, page = 1) {
-    this.store.dispatch(resetUsers());
-    if ($event.length > 0) {
-      this.chatService.chatNameSpaceProvider.value?.emit(JOIN_ROOM_EVENT, {
-        room: USERS_ROOM,
-        search: $event ? $event : '',
-        page
-      });
-    } else {
-      this.page = 1;
-      this.loadUsers(this.page);
-    }
-  }
-
-  public loadUsers(page = 1) {
+  public searchUsers($event: string) {
     this.chatService.chatNameSpaceProvider.value?.emit(JOIN_ROOM_EVENT, {
       room: USERS_ROOM,
-      search: '',
-      page
+      search: $event ? $event : ''
     });
-  }
-
-  public onScrollDown($event?) {
-    this.page++;
-    this.loadUsers(this.page);
-  }
-
-  public onUp($event?) {
   }
 
   ngOnDestroy() {
